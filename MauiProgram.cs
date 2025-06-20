@@ -34,6 +34,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<SignInPage>();
         builder.Services.AddSingleton<CartPage>();
 		builder.Services.AddSingleton<FavoritesPage>();
+		builder.Services.AddSingleton<MainPage>();
+		builder.Services.AddSingleton<StorePage>();
         return builder.Build();
 	}
 }

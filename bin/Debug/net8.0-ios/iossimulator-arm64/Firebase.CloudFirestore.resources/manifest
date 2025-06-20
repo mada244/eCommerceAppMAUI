@@ -1,0 +1,57 @@
+﻿<BindingAssembly>
+	<NativeReference Name="FirebaseFirestore.xcframework">
+		<_Id>FirebaseFirestore</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks>MobileCoreServices SystemConfiguration</Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags>-ObjC -lc++</LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks></WeakFrameworks>
+	</NativeReference>
+	<NativeReference Name="grpc.xcframework">
+		<_Id>grpc</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks></Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags>-lc++ -lz</LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks></WeakFrameworks>
+	</NativeReference>
+	<NativeReference Name="grpcpp.xcframework">
+		<_Id>grpcpp</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks></Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks></WeakFrameworks>
+	</NativeReference>
+	<NativeReference Name="openssl_grpc.xcframework">
+		<_Id>openssl_grpc</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks></Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks></WeakFrameworks>
+	</NativeReference>
+	<NativeReference Name="absl.xcframework">
+		<_Id>absl</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks></Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags>-lc++</LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks></WeakFrameworks>
+	</NativeReference>
+</BindingAssembly>

@@ -1,0 +1,97 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.ProfilePage"
+             BackgroundColor="#fdf7ee">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Titlu -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,20,0,0">
+            <Label Text="My Profile"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
+            <ImageButton Source="share.png" Grid.Column="1" BackgroundColor="Transparent" HeightRequest="28" WidthRequest="28" Margin="0,0,20,0" VerticalOptions="Center" HorizontalOptions="End"/>
+        </Grid>
+
+        <!-- Conținut principal -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="18" Padding="0,0,0,0">
+                <!-- Card profil -->
+                <Frame BackgroundColor="#f5e7d6" CornerRadius="0" Padding="24,24,24,24" HasShadow="False" Margin="0,0,0,0">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding UserName}" 
+                                   FontSize="28" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2d2233" 
+                                   HorizontalOptions="Start"/>
+                            <Label Text="{Binding UserEmail}" 
+                                   FontSize="18" 
+                                   TextColor="#2d2233" 
+                                   HorizontalOptions="Start"/>
+                            <!-- Afișează un mesaj dacă utilizatorul nu este logat -->
+                            <Label Text="Not logged in" 
+                                   FontSize="18" 
+                                   TextColor="#a3a3a3" 
+                                   HorizontalOptions="Start" 
+                                   IsVisible="{Binding IsAuthenticated, Converter={StaticResource InverseBoolConverter}}"/>
+                        </VerticalStackLayout>
+                        <ImageButton Source="edit.png" 
+                                     Grid.Column="1" 
+                                     BackgroundColor="Transparent" 
+                                     HeightRequest="28" 
+                                     WidthRequest="28" 
+                                     VerticalOptions="Start" 
+                                     HorizontalOptions="End"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Shipping Address -->
+                <Frame BackgroundColor="#f6f4fa" CornerRadius="0" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                    <Grid RowDefinitions="Auto,Auto" Padding="0,0,0,0">
+                        <Grid ColumnDefinitions="*,Auto" Padding="20,16,20,0">
+                            <Label Text="MY SHIPPING ADDRESS" FontSize="18" TextColor="#2d2233" FontAttributes="Bold"/>
+                            <ImageButton Source="plus.png" Grid.Column="1" BackgroundColor="Transparent" HeightRequest="24" WidthRequest="24"/>
+                        </Grid>
+                        <Frame Grid.Row="1" BackgroundColor="#f6f4fa" CornerRadius="18" Padding="0" Margin="20,12,20,20" HeightRequest="120" VerticalOptions="Center" HorizontalOptions="Center" HasShadow="False">
+                            <Image Source="box.png" HeightRequest="60" WidthRequest="60" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        </Frame>
+                    </Grid>
+                </Frame>
+
+                <!-- My Orders -->
+                <Frame BackgroundColor="#fdf7ee" CornerRadius="0" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                    <Grid ColumnDefinitions="*,Auto" Padding="20,0,20,0">
+                        <Label Text="MY ORDERS" FontSize="18" TextColor="#2d2233" FontAttributes="Bold"/>
+                        <Image Source="arrow_right.png" Grid.Column="1" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" HorizontalOptions="End"/>
+                    </Grid>
+                </Frame>
+
+                <!-- App Settings -->
+                <Frame BackgroundColor="#fdf7ee" CornerRadius="0" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                    <Grid ColumnDefinitions="*,Auto" Padding="20,0,20,0">
+                        <Label Text="APP SETTINGS" FontSize="18" TextColor="#2d2233" FontAttributes="Bold"/>
+                        <Image Source="arrow_right.png" Grid.Column="1" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" HorizontalOptions="End"/>
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bara de navigare jos -->
+        <Grid Grid.Row="2" Padding="0" HeightRequest="70" BackgroundColor="#f6eddb">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="🏠" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnHomeClicked"/>
+            <Button Grid.Column="1" Text="🛍️" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnStoreClicked"/>
+            <Button Grid.Column="2" Text="❤️" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnFavoriteClicked"/>
+            <Button Grid.Column="3" Text="🛒" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnCartClicked"/>
+            <Button Grid.Column="4" Text="👤" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnProfileClicked"/>
+        </Grid>
+    </Grid>
+</ContentPage>

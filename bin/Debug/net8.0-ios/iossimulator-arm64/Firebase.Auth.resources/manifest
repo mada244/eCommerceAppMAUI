@@ -1,0 +1,13 @@
+﻿<BindingAssembly>
+	<NativeReference Name="FirebaseAuth.xcframework">
+		<_Id>FirebaseAuth</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks>Security SafariServices</Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags>-ObjC -lc++ -lsqlite3 -lz</LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks></WeakFrameworks>
+	</NativeReference>
+</BindingAssembly>

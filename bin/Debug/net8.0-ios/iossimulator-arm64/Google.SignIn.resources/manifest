@@ -1,0 +1,24 @@
+﻿<BindingAssembly>
+	<NativeReference Name="AppAuth.xcframework">
+		<_Id>AppAuth</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks>SafariServices</Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks>AuthenticationServices</WeakFrameworks>
+	</NativeReference>
+	<NativeReference Name="GTMAppAuth.xcframework">
+		<_Id>GTMAppAuth</_Id>
+		<ForceLoad>True</ForceLoad>
+		<Frameworks>Security SystemConfiguration SafariServices</Frameworks>
+		<IsCxx></IsCxx>
+		<Kind>Framework</Kind>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<SmartLink>True</SmartLink>
+		<WeakFrameworks></WeakFrameworks>
+	</NativeReference>
+</BindingAssembly>

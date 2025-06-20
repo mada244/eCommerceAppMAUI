@@ -1,0 +1,77 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.SignInPage"
+             BackgroundColor="#d2c4ad">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,60,30,0" Spacing="20">
+            <!-- Email Entry -->
+            <Entry x:Name="EmailEntry"
+                   Placeholder="Email"
+                   BackgroundColor="White"
+                   HeightRequest="50"
+                   FontSize="18"
+                   Margin="0,0,0,0"
+                   />
+
+            <!-- Password Entry with Eye Icon -->
+            <Grid>
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Password"
+                       IsPassword="True"
+                       BackgroundColor="White"
+                       HeightRequest="50"
+                       FontSize="18"
+                       />
+                <ImageButton Source="eye.png"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="End"
+                             VerticalOptions="Center"
+                             Clicked="OnTogglePasswordVisibility"/>
+            </Grid>
+
+            <!-- Sign In Button -->
+            <Button Text="Sign In"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    FontSize="22"
+                    CornerRadius="30"
+                    HeightRequest="60"
+                    Clicked="OnSignInClicked"
+                    />
+
+            <!-- Forgot Password -->
+            <Button Text="Forgot password ?"
+                    x:Name="ForgotPasswordButton"
+                    BackgroundColor="#b3a692"
+                    TextColor="#e7ddc9"
+                    FontSize="20"
+                    CornerRadius="10"
+                    Clicked="OnForgotPasswordClicked"
+                    />
+
+            <!-- Logo -->
+            <Image Source="logo.png"
+                   HeightRequest="250"
+                   WidthRequest="250"
+                   HorizontalOptions="Center"
+                   Margin="0,40,0,0"/>
+
+            <!-- Sign Up Link -->
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label Text="Don't have an account ?"
+                       TextColor="#2d2233"
+                       FontSize="20"/>
+                <Label Text=" Sign Up"
+                       x:Name="SignUpLabel"
+                       TextColor="#2d2233"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSignUpTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage> 

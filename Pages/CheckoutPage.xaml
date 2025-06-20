@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.CheckoutPage"
+             Title="Checkout">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="20,10" BackgroundColor="#2196F3">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0" 
+                        Text="←" 
+                        FontSize="24" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White"
+                        Clicked="OnBackClicked"/>
+                
+                <Label Grid.Column="1" 
+                       Text="Checkout" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                
+                <Label Grid.Column="2" 
+                       Text="💳" 
+                       FontSize="20" 
+                       TextColor="White"/>
+            </Grid>
+        </Grid>
+
+        <!-- Checkout Form -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <StackLayout Spacing="20">
+                <!-- Order Summary -->
+                <Frame Padding="15" BorderColor="#E0E0E0" CornerRadius="10" HasShadow="True">
+                    <StackLayout>
+                        <Label Text="Order Summary" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               Margin="0,0,0,10"/>
+                        
+                        <CollectionView x:Name="OrderItemsView" 
+                                       HeightRequest="200">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="*,Auto,Auto" Padding="5">
+                                        <Label Grid.Column="0" 
+                                               Text="{Binding ProductName}" 
+                                               FontSize="14"/>
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding Quantity, StringFormat='x{0}'}" 
+                                               FontSize="14" 
+                                               HorizontalOptions="Center"/>
+                                        <Label Grid.Column="2" 
+                                               Text="{Binding Price, StringFormat='${0:F2}'}" 
+                                               FontSize="14" 
+                                               HorizontalOptions="End"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        
+                        <BoxView HeightRequest="1" BackgroundColor="#E0E0E0" Margin="0,10"/>
+                        
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" 
+                                   Text="Total:" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold"/>
+                            <Label Grid.Column="1" 
+                                   x:Name="TotalLabel" 
+                                   Text="$0.00" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2196F3"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Shipping Information -->
+                <Frame Padding="15" BorderColor="#E0E0E0" CornerRadius="10" HasShadow="True">
+                    <StackLayout>
+                        <Label Text="Shipping Information" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               Margin="0,0,0,15"/>
+                        
+                        <Entry x:Name="NameEntry" 
+                               Placeholder="Full Name" 
+                               Margin="0,0,0,10"/>
+                        
+                        <Entry x:Name="AddressEntry" 
+                               Placeholder="Shipping Address" 
+                               Margin="0,0,0,10"/>
+                        
+                        <Entry x:Name="CityEntry" 
+                               Placeholder="City" 
+                               Margin="0,0,0,10"/>
+                        
+                        <Entry x:Name="PhoneEntry" 
+                               Placeholder="Phone Number" 
+                               Keyboard="Telephone"
+                               Margin="0,0,0,10"/>
+                        
+                        <Entry x:Name="EmailEntry" 
+                               Placeholder="Email" 
+                               Keyboard="Email"
+                               Margin="0,0,0,10"/>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Payment Information -->
+                <Frame Padding="15" BorderColor="#E0E0E0" CornerRadius="10" HasShadow="True">
+                    <StackLayout>
+                        <Label Text="Payment Information" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               Margin="0,0,0,15"/>
+                        
+                        <Entry x:Name="CardNumberEntry" 
+                               Placeholder="Card Number" 
+                               Keyboard="Numeric"
+                               Margin="0,0,0,10"/>
+                        
+                        <Grid ColumnDefinitions="*,*" Margin="0,0,0,10">
+                            <Entry Grid.Column="0" 
+                                   x:Name="ExpiryEntry" 
+                                   Placeholder="MM/YY" 
+                                   Keyboard="Numeric"/>
+                            <Entry Grid.Column="1" 
+                                   x:Name="CVVEntry" 
+                                   Placeholder="CVV" 
+                                   Keyboard="Numeric"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Place Order Button -->
+        <Grid Grid.Row="2" Padding="20" BackgroundColor="#F5F5F5">
+            <Button x:Name="PlaceOrderButton"
+                    Text="Place Order" 
+                    BackgroundColor="#4CAF50" 
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Clicked="OnPlaceOrderClicked"/>
+        </Grid>
+    </Grid>
+
+</ContentPage> 

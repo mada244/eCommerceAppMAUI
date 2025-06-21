@@ -37,8 +37,9 @@ namespace EcommerceApp.Services
                 var db = FirebaseConfig.GetFirestoreDb();
                 var cartCollection = db.Collection("users").Document(userId).Collection("cart");
                 var productsCollection = db.Collection("Products");
-                var cartSnapshot = await cartCollection.GetSnapshotAsync();
 
+                var cartSnapshot = await cartCollection.GetSnapshotAsync();
+                
                 _cartItems.Clear();
                 CartProduct.Clear();
 

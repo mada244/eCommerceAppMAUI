@@ -6,8 +6,8 @@ namespace EcommerceApp.Models
     [FirestoreData]
     public class Product
     {
-        [FirestoreProperty]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        [FirestoreDocumentId]
+        public string Id { get; set; }
         [FirestoreProperty]
         public string Name { get; set; }
         [FirestoreProperty]

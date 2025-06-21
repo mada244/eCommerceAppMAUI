@@ -14,7 +14,7 @@
 
         <!-- Conținut principal scrollabil -->
         <Grid Grid.Row="1">
-            <CollectionView x:Name="CartListView" IsVisible="False" Margin="0,10,0,0" ItemsSource="{Binding CartProducts}">
+            <CollectionView x:Name="CartListView" IsVisible="False" Margin="0,10,0,0" ItemsSource="{Binding CartDisplayItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="5" 

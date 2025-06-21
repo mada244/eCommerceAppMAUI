@@ -12,21 +12,7 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
 {
     private FirebaseAuthService _authService;
     private CartService _cartService;
-    public ObservableCollection<CartItem> CartItems { get; set; } = new ObservableCollection<CartItem>();
-    private ObservableCollection<Product> _cartProducts;
-    public ObservableCollection<Product> CartProducts
-    {
-        get => _cartProducts;
-        set
-        {
-            if (_cartProducts != value)
-            {
-                _cartProducts = value;
-                OnPropertyChanged(nameof(CartProducts));
-                UpdateEmptyStateVisibility();
-            }
-        }
-    }
+    public ObservableCollection<CartDisplayItem> CartDisplayItems { get; set; } = new ObservableCollection<CartDisplayItem>();
 
     public event PropertyChangedEventHandler PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)
@@ -39,7 +25,6 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
         InitializeComponent();
         _authService = authService;
         _cartService = cartService;
-        CartProducts = _cartService.CartProduct;
         BindingContext = this;
     }
 
@@ -48,17 +33,15 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
         base.OnAppearing();
         if (_authService.IsAuthenticated)
         {
-            await _cartService.LoadCartForCurrentUserAsync();
-            OnPropertyChanged(nameof(CartProducts));
+            await LoadCartFromFirebase();
         }
-        UpdateEmptyStateVisibility();
     }
 
     private void UpdateEmptyStateVisibility()
     {
         if (EmptyCartLayout != null && CartListView != null)
         {
-            bool isEmpty = CartProducts == null || CartProducts.Count == 0;
+            bool isEmpty = !CartDisplayItems.Any();
             EmptyCartLayout.IsVisible = isEmpty;
             CartListView.IsVisible = !isEmpty;
         }
@@ -69,12 +52,30 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
         if (_authService.IsAuthenticated)
         {
             await _cartService.LoadCartForCurrentUserAsync();
-            CartItems.Clear();
-            foreach (var item in _cartService.GetCartItems())
+            var products = _cartService.CartProduct;
+            var cartItems = _cartService.GetCartItems();
+
+            CartDisplayItems.Clear();
+
+            foreach (var item in cartItems)
             {
-                CartItems.Add(item);
+                var product = products.FirstOrDefault(p => p.Id == item.ProductId);
+                if (product != null)
+                {
+                    CartDisplayItems.Add(new CartDisplayItem
+                    {
+                        Id = product.Id,
+                        ProductName = product.Name,
+                        Price = product.Price,
+                        ImageUrl = product.ImageUrl,
+                        Quantity = item.Quantity,
+                        Brand = product.Brand
+                    });
+                }
             }
-            OnPropertyChanged(nameof(CartItems));
+            OnPropertyChanged(nameof(CartDisplayItems));
+            UpdateEmptyStateVisibility();
+            UpdateTotals(CartDisplayItems.ToList());
         }
     }
 
@@ -99,30 +100,6 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
         // await LoadCartFromFirebase();
     }
 
-    private void UpdateCartDisplay()
-    {
-        if (CartItems.Any())
-        {
-            var displayItems = CartItems.Select(item => new CartDisplayItem
-            {
-                Id = item.ProductId,
-                Quantity = item.Quantity
-            }).ToList();
-            CartListView.ItemsSource = displayItems;
-            CartListView.IsVisible = true;
-            EmptyCartLayout.IsVisible = false;
-            UpdateTotals(displayItems);
-        }
-        else
-        {
-            CartListView.IsVisible = false;
-            EmptyCartLayout.IsVisible = true;
-            SubTotalLabel.Text = "$0.00";
-            DiscountLabel.Text = "$0.00";
-            NetAmountLabel.Text = "$0.00";
-        }
-    }
-
     private void UpdateTotals(List<CartDisplayItem> items)
     {
         double subtotal = items.Sum(i => i.Price * i.Quantity);
@@ -139,19 +116,15 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
         {
             try
             {
-                var cartItem = CartItems.FirstOrDefault(x => x.ProductId == item.Id);
-                if (cartItem != null)
+                if (item.Quantity > 1)
                 {
-                    if (cartItem.Quantity > 1)
-                    {
-                        await _cartService.UpdateQuantityAsync(_authService.UserId, item.Id, cartItem.Quantity - 1);
-                    }
-                    else
-                    {
-                        await _cartService.RemoveFromCartAsync(_authService.UserId, item.Id);
-                    }
-                    await LoadCartFromFirebase();
+                    await _cartService.UpdateQuantityAsync(_authService.UserId, item.Id, item.Quantity - 1);
                 }
+                else
+                {
+                    await _cartService.RemoveFromCartAsync(_authService.UserId, item.Id);
+                }
+                await LoadCartFromFirebase();
             }
             catch (Exception ex)
             {
@@ -167,12 +140,8 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
         {
             try
             {
-                var cartItem = CartItems.FirstOrDefault(x => x.ProductId == item.Id);
-                if (cartItem != null)
-                {
-                    await _cartService.UpdateQuantityAsync(_authService.UserId, item.Id, cartItem.Quantity + 1);
-                    await LoadCartFromFirebase();
-                }
+                await _cartService.UpdateQuantityAsync(_authService.UserId, item.Id, item.Quantity + 1);
+                await LoadCartFromFirebase();
             }
             catch (Exception ex)
             {
@@ -225,9 +194,9 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
 
     private async void OnCheckoutClicked(object sender, EventArgs e)
     {
-        if (CartItems.Any())
+        if (CartDisplayItems.Any())
         {
-            await Navigation.PushAsync(new CheckoutPage(CartItems.ToList()));
+            await Navigation.PushAsync(new CheckoutPage(CartDisplayItems.Select(i => new CartItem { ProductId = i.Id, Quantity = i.Quantity }).ToList()));
         }
         else
         {

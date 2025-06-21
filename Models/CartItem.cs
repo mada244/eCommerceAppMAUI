@@ -5,7 +5,7 @@ namespace EcommerceApp.Models
     [FirestoreData]
     public class CartItem
     {
-        [FirestoreProperty]
+        [FirestoreDocumentId]
         public string ProductId { get; set; }
         [FirestoreProperty]
         public int Quantity { get; set; }

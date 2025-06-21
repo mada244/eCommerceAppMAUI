@@ -221,9 +221,8 @@ public partial class MainPage : ContentPage
 
 	private async void OnProfileClicked(object sender, EventArgs e)
 	{
-		var authService = (FirebaseAuthService)Handler.MauiContext.Services.GetService(typeof(FirebaseAuthService));
-		await Navigation.PushAsync(new ProfilePage(authService));
-	}
+        await Navigation.PushAsync(App.ServiceProvider.GetRequiredService<ProfilePage>());
+    }
 
 	private async void OnProductTapped(object sender, TappedEventArgs e)
 	{

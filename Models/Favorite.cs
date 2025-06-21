@@ -1,12 +1,11 @@
+using Google.Cloud.Firestore;
+
 namespace EcommerceApp.Models
 {
+    [FirestoreData]
     public class Favorite
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string UserId { get; set; }
+        [FirestoreProperty]
         public string ProductId { get; set; }
-        public string ProductName { get; set; }
-        public double Price { get; set; }
-        public string ImageUrl { get; set; }
     }
 } 

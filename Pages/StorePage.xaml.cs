@@ -9,8 +9,8 @@ public partial class StorePage : ContentPage
 {
 	private FirebaseAuthService? _authService;
 	private FirebaseProductService? _productService;
-	private CartService? _cartService;
-	private FavoriteService? _favoriteService;
+	private CartService _cartService;
+	private FavoriteService _favoriteService;
 	private ObservableCollection<Product> _products;
 	private string _currentCategory = "All";
 
@@ -94,14 +94,8 @@ public partial class StorePage : ContentPage
 			{
 				try
 				{
-					await _cartService?.AddToCartForCurrentUserAsync(
-						product.Id,
-						product.Name,
-						product.Price,
-						product.ImageUrl,
-						1
-					);
-					await DisplayAlert("Success", "Product added to cart!", "OK");
+                    await _cartService.AddToCartAsync(_authService.UserId, product.Id, 1);
+                    await DisplayAlert("Success", "Product added to cart!", "OK");
 				}
 				catch (Exception ex)
 				{
@@ -128,12 +122,12 @@ public partial class StorePage : ContentPage
 					var isFavorite = _favoriteService?.IsFavorite(product.Id) == true;
 					if (isFavorite)
 					{
-						await _favoriteService?.RemoveFromFavoritesForCurrentUserAsync(product.Id);
+						await _favoriteService.RemoveFromFavoritesAsync(_authService.UserId,product.Id);
 						await DisplayAlert("Removed", "Product removed from favorites", "OK");
 					}
 					else
 					{
-						await _favoriteService?.AddToFavoritesForCurrentUserAsync(product.Id, product.Name, product.Price, product.ImageUrl);
+						await _favoriteService.AddToFavoritesAsync(_authService.UserId, product.Id);
 						await DisplayAlert("Added", "Product added to favorites", "OK");
 					}
 				}

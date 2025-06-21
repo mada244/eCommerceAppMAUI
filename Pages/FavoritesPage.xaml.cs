@@ -75,7 +75,7 @@ public partial class FavoritesPage : ContentPage, INotifyPropertyChanged
     {
         if (sender is Button button && button.CommandParameter is FavoriteDisplayItem item)
         {
-            await _favoriteService.RemoveFromFavoritesForCurrentUserAsync(item.ProductId);
+            await _favoriteService.RemoveFromFavoritesAsync(_authService.UserId,item.ProductId);
             await _favoriteService.LoadFavoritesAsync(_authService.UserId);
             OnPropertyChanged(nameof(FavoriteProducts));
         }

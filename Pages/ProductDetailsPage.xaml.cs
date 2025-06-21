@@ -180,7 +180,7 @@ public partial class ProductDetailsPage : ContentPage
 		await Navigation.PopAsync();
 	}
 
-	private async void OnFavoriteTapped(object sender, TappedEventArgs e)
+	private async void OnFavoriteClicked(object sender, EventArgs e)
 	{
 		if (_authService?.IsAuthenticated == true)
 		{
@@ -188,12 +188,12 @@ public partial class ProductDetailsPage : ContentPage
 			{
 				if (_isFavorite)
 				{
-					await _favoriteService?.RemoveFromFavoritesForCurrentUserAsync(_product.Id);
+					await _favoriteService?.RemoveFromFavoritesAsync(_authService.UserId,_product.Id);
 					await DisplayAlert("Removed", "Product removed from favorites", "OK");
 				}
 				else
 				{
-					await _favoriteService?.AddToFavoritesForCurrentUserAsync(_product.Id, _product.Name, _product.Price, _product.ImageUrl);
+					await _favoriteService.AddToFavoritesAsync(_authService.UserId, _product.Id);
 					await DisplayAlert("Added", "Product added to favorites", "OK");
 				}
 				

@@ -56,44 +56,35 @@ namespace EcommerceApp.Services
             }
         }
 
-        
-
-        
         public List<Favorite> GetFavorites() => _favorites;
 
-        public async Task AddToFavoritesAsync(string userId, string productId, string productName, double price, string imageUrl)
+        public async Task AddToFavoritesAsync(string userId, string productId)
         {
-            if (string.IsNullOrEmpty(userId))
+            try
             {
-                System.Diagnostics.Debug.WriteLine("Cannot add to favorites: UserId is null or empty");
-                return;
-            }
+                if (string.IsNullOrEmpty(userId))
+                {
+                    System.Diagnostics.Debug.WriteLine("Cannot add to cart: UserId is null or empty");
+                    return;
+                }
 
-            await LoadFavoritesAsync(userId);
-            var existingFavorite = _favorites.FirstOrDefault(fav => fav.ProductId == productId);
-            if (existingFavorite == null)
-            {
-                var newFavorite = new Favorite
+                var db = FirebaseConfig.GetFirestoreDb();
+                var user = db.Collection("users").Document(userId);
+                var cartItemRef = user.Collection("favorites").Document(productId);
+                var doc = await cartItemRef.GetSnapshotAsync();
+
+                var newItem = new CartItem
                 {
                     ProductId = productId,
-                    ProductName = productName,
-                    Price = price,
-                    ImageUrl = imageUrl
                 };
-                _favorites.Add(newFavorite);
-                await SaveFavoritesAsync();
-            }
-        }
+                await cartItemRef.SetAsync(newItem);
 
-        public async Task AddToFavoritesForCurrentUserAsync(string productId, string productName, double price, string imageUrl)
-        {
-            if (!_authService.IsAuthenticated)
+            }
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Cannot add to favorites: User is not authenticated");
-                return;
+                Console.WriteLine(ex.Message);
+                throw;
             }
-
-            await AddToFavoritesAsync(_authService.UserId, productId, productName, price, imageUrl);
         }
 
         public async Task RemoveFromFavoritesAsync(string userId, string productId)
@@ -111,17 +102,6 @@ namespace EcommerceApp.Services
                 _favorites.Remove(favorite);
                 await SaveFavoritesAsync();
             }
-        }
-
-        public async Task RemoveFromFavoritesForCurrentUserAsync(string productId)
-        {
-            if (!_authService.IsAuthenticated)
-            {
-                System.Diagnostics.Debug.WriteLine("Cannot remove from favorites: User is not authenticated");
-                return;
-            }
-
-            await RemoveFromFavoritesAsync(_authService.UserId, productId);
         }
 
         public bool IsFavorite(string productId)
@@ -166,9 +146,9 @@ namespace EcommerceApp.Services
        
         // Metode pentru compatibilitate cu codul existent
 
-        public void AddToFavorites(string productId, string productName, double price, string imageUrl) => 
-            Task.Run(() => AddToFavoritesForCurrentUserAsync(productId, productName, price, imageUrl));
+        public void AddToFavorites(string productId) => 
+            Task.Run(() => AddToFavoritesAsync(_authService.UserId ,productId));
         public void RemoveFromFavorites(string productId) => 
-            Task.Run(() => RemoveFromFavoritesForCurrentUserAsync(productId));
+            Task.Run(() => RemoveFromFavoritesAsync(_authService.UserId,productId));
     }
 } 

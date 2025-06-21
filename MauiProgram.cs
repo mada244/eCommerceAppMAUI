@@ -31,11 +31,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<OrderService>();
         builder.Services.AddSingleton<UserService>();
 
-        builder.Services.AddSingleton<SignInPage>();
-        builder.Services.AddSingleton<CartPage>();
-		builder.Services.AddSingleton<FavoritesPage>();
-		builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddSingleton<StorePage>();
+        builder.Services.AddTransient<SignInPage>();
+        builder.Services.AddTransient<CartPage>();
+		builder.Services.AddTransient<FavoritesPage>();
+		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<StorePage>();
         return builder.Build();
 	}
 }

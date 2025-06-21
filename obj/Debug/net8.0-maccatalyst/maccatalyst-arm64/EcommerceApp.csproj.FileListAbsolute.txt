@@ -5,6 +5,7 @@
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/dotnet_bot@3x.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/dotnet_bot@2x.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/dotnet_bot.png
+/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Resources/favorite.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Assets.xcassets/appicon.appiconset/appiconItunesArtwork.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Assets.xcassets/appicon.appiconset/appicon83.5x83.5@2x.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Assets.xcassets/appicon.appiconset/appicon76x76@2x.png
@@ -17,6 +18,7 @@
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Assets.xcassets/appicon.appiconset/appicon20x20@3x.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Assets.xcassets/appicon.appiconset/appicon20x20@2x.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Assets.xcassets/appicon.appiconset/Contents.json
+/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/r/Resources/feature1.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/mauiimage.stamp
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resizetizer/f/MauiInfo.plist
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/mauifont.stamp

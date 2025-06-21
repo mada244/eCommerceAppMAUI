@@ -71,13 +71,6 @@ public partial class StorePage : ContentPage
 		}
 	}
 
-	private void OnCategoryTapped(object sender, TappedEventArgs e)
-	{
-		// TODO: Implement category filtering
-		// For now, just show all products
-		_ = LoadProductsAsync();
-	}
-
 	private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
 	{
 		// TODO: Implement search functionality
@@ -131,7 +124,7 @@ public partial class StorePage : ContentPage
 			{
 				try
 				{
-					await _favoriteService?.LoadFavoritesForCurrentUserAsync();
+					//await _favoriteService?.LoadFavoritesForCurrentUserAsync();
 					var isFavorite = _favoriteService?.IsFavorite(product.Id) == true;
 					if (isFavorite)
 					{

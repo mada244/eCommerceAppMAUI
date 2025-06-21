@@ -4,39 +4,60 @@ using System.IO;
 using Microsoft.Maui.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using Google.Cloud.Firestore;
 
 namespace EcommerceApp.Services
 {
     public class CartService
     {
-
-        private List<CartItem> _cartItems = new();
+        private ObservableCollection<CartItem> _cartItems = new();
         private string _userId = string.Empty;
         private FirebaseAuthService _authService;
 
         public CartService(FirebaseAuthService authService) {
-            _authService = authService;        }
+            _authService = authService;
+        }
+
+        public ObservableCollection<Product> CartProduct { get; set; } = new ObservableCollection<Product>();
 
         public async Task LoadCartAsync(string userId)
         {
             if (string.IsNullOrEmpty(userId))
             {
-                System.Diagnostics.Debug.WriteLine("Cannot load cart: UserId is null or empty");
+                System.Diagnostics.Debug.WriteLine("Cannot load cart: User is not authenticated");
+                _cartItems.Clear();
+                CartProduct.Clear();
                 return;
             }
 
             _userId = userId;
             try
             {
-                // Pentru moment, folosim doar local storage
-                // TODO: Implement Firebase integration when needed
-                //LoadCartLocal(userId);
+                var db = FirebaseConfig.GetFirestoreDb();
+                var cartCollection = db.Collection("users").Document(userId).Collection("cart");
+                var productsCollection = db.Collection("Products");
+                var cartSnapshot = await cartCollection.GetSnapshotAsync();
+
+                _cartItems.Clear();
+                CartProduct.Clear();
+
+                foreach (var document in cartSnapshot.Documents)
+                {
+                    var cartItem = document.ConvertTo<CartItem>();
+                    _cartItems.Add(cartItem);
+
+                    var productDoc = await productsCollection.Document(cartItem.ProductId).GetSnapshotAsync();
+                    if (productDoc.Exists)
+                    {
+                        var product = productDoc.ConvertTo<Product>();
+                        CartProduct.Add(product);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error loading cart: {ex.Message}");
-                // Fallback la local storage
-                //LoadCartLocal(userId);
             }
         }
 
@@ -45,57 +66,44 @@ namespace EcommerceApp.Services
             if (!_authService.IsAuthenticated)
             {
                 System.Diagnostics.Debug.WriteLine("Cannot load cart: User is not authenticated");
+                _cartItems.Clear();
+                CartProduct.Clear();
                 return;
             }
 
             await LoadCartAsync(_authService.UserId);
         }
 
-        //private void LoadCartLocal(string userId)
-        //{
-        //    var file = GetFileName(userId);
-        //    if (File.Exists(file))
-        //    {
-        //        var json = File.ReadAllText(file);
-        //        List<CartItem>? list = JsonSerializer.Deserialize<List<CartItem>>(json);
-        //        if (list != null)
-        //            _cartItems = list;
-        //    }
-        //    else
-        //    {
-        //        _cartItems = new();
-        //    }
-        //}
+        public ObservableCollection<CartItem> GetCartItems() => _cartItems;
 
-        public List<CartItem> GetCartItems() => _cartItems;
-
-        public async Task AddToCartAsync(string userId, string productId, string productName, double price, string imageUrl, int quantity = 1)
+        public async Task AddToCartAsync(string userId, string productId, int quantity = 1)
         {
-            if (string.IsNullOrEmpty(userId))
+            try
             {
-                System.Diagnostics.Debug.WriteLine("Cannot add to cart: UserId is null or empty");
-                return;
-            }
-
-            await LoadCartAsync(userId);
-            var existingItem = _cartItems.FirstOrDefault(item => item.ProductId == productId);
-            if (existingItem != null)
-            {
-                existingItem.Quantity += quantity;
-            }
-            else
-            {
-                var newItem = new CartItem
+                if (string.IsNullOrEmpty(userId))
                 {
-                    ProductId = productId,
-                    ProductName = productName,
-                    Price = price,
-                    Quantity = quantity,
-                    ImageUrl = imageUrl
-                };
-                _cartItems.Add(newItem);
+                    System.Diagnostics.Debug.WriteLine("Cannot add to cart: UserId is null or empty");
+                    return;
+                }
+
+                var db = FirebaseConfig.GetFirestoreDb();
+                var user = db.Collection("users").Document(userId);
+                var cartItemRef = user.Collection("cart").Document(productId);
+                var doc = await cartItemRef.GetSnapshotAsync();
+
+                    var newItem = new CartItem
+                    {
+                        ProductId = productId,
+                        Quantity = doc.Exists ? doc.ConvertTo<CartItem>().Quantity + quantity : quantity,
+                    };
+                    await cartItemRef.SetAsync(newItem);
+                
             }
-            await SaveCartAsync();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         public async Task AddToCartForCurrentUserAsync(string productId, string productName, double price, string imageUrl, int quantity = 1)
@@ -106,30 +114,25 @@ namespace EcommerceApp.Services
                 return;
             }
 
-            await AddToCartAsync(_authService.UserId, productId, productName, price, imageUrl, quantity);
+            await AddToCartAsync(_authService.UserId, productId, quantity);
         }
 
         public async Task UpdateQuantityAsync(string userId, string itemId, int newQuantity)
         {
             if (string.IsNullOrEmpty(userId))
             {
-                System.Diagnostics.Debug.WriteLine("Cannot update quantity: UserId is null or empty");
+                System.Diagnostics.Debug.WriteLine("Cannot update quantity");
                 return;
             }
-
-            await LoadCartAsync(userId);
-            var item = _cartItems.FirstOrDefault(item => item.Id == itemId);
-            if (item != null)
+            if (newQuantity <= 0)
             {
-                if (newQuantity <= 0)
-                {
-                    await RemoveFromCartAsync(userId, itemId);
-                }
-                else
-                {
-                    item.Quantity = newQuantity;
-                    await SaveCartAsync();
-                }
+                await RemoveFromCartAsync(userId, itemId);
+            }
+            else
+            {
+                var db = FirebaseConfig.GetFirestoreDb();
+                var cartItemRef = db.Collection("users").Document(userId).Collection("cart").Document(itemId);
+                await cartItemRef.UpdateAsync("Quantity", newQuantity);
             }
         }
 
@@ -137,35 +140,39 @@ namespace EcommerceApp.Services
         {
             if (string.IsNullOrEmpty(userId))
             {
-                System.Diagnostics.Debug.WriteLine("Cannot remove from cart: UserId is null or empty");
+                System.Diagnostics.Debug.WriteLine("Cannot remove from cart");
                 return;
             }
-
-            await LoadCartAsync(userId);
-            var item = _cartItems.FirstOrDefault(item => item.Id == itemId);
-            if (item != null)
-            {
-                _cartItems.Remove(item);
-                await SaveCartAsync();
-            }
+            var db = FirebaseConfig.GetFirestoreDb();
+            var cartItemRef = db.Collection("users").Document(userId).Collection("cart").Document(itemId);
+            await cartItemRef.DeleteAsync();
         }
 
         public async Task ClearCartAsync(string userId)
         {
             if (string.IsNullOrEmpty(userId))
             {
-                System.Diagnostics.Debug.WriteLine("Cannot clear cart: UserId is null or empty");
+                System.Diagnostics.Debug.WriteLine("Cannot clear cart");
                 return;
             }
 
-            await LoadCartAsync(userId);
-            _cartItems.Clear();
-            await SaveCartAsync();
+            var db = FirebaseConfig.GetFirestoreDb();
+            var cartCollection = db.Collection("users").Document(userId).Collection("cart");
+            var snapshot = await cartCollection.GetSnapshotAsync();
+            
+            var batch = db.StartBatch();
+            foreach (var doc in snapshot.Documents)
+            {
+                batch.Delete(doc.Reference);
+            }
+            await batch.CommitAsync();
         }
 
         public double GetCartTotal()
         {
-            return _cartItems.Sum(item => item.Price * item.Quantity);
+            // This needs product info, which is not stored in _cartItems.
+            // A better implementation would be to calculate this based on CartProduct and _cartItems.
+            return 0;
         }
 
         public int GetCartItemCount()
@@ -183,24 +190,6 @@ namespace EcommerceApp.Services
             return _authService.UserId;
         }
 
-        private async Task SaveCartAsync()
-        {
-            if (!string.IsNullOrEmpty(_userId))
-            {
-                try
-                {
-                    // Pentru moment, salvează doar local
-                    // TODO: Implement Firebase integration when needed
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Error saving cart: {ex.Message}");
-                    // Fallback la local storage
-                }
-            }
-        }
-
-        // Metode pentru compatibilitate cu codul existent
         public void AddToCart(string productId, string productName, double price, string imageUrl) => 
             Task.Run(() => AddToCartForCurrentUserAsync(productId, productName, price, imageUrl));
         public void UpdateQuantity(string itemId, int newQuantity) => 

@@ -3,92 +3,81 @@ using EcommerceApp.Services;
 using EcommerceApp.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace EcommerceApp;
 
-public partial class FavoritesPage : ContentPage
+public partial class FavoritesPage : ContentPage, INotifyPropertyChanged
 {
     private FirebaseAuthService _authService;
     private FavoriteService _favoriteService;
-    private List<Favorite> _favorites;
+    public ObservableCollection<Favorite> Favorites { get; set; } = new ObservableCollection<Favorite>();
+    private ObservableCollection<Product> _favoriteProducts;
+    public ObservableCollection<Product> FavoriteProducts
+    {
+        get => _favoriteProducts;
+        set
+        {
+            if (_favoriteProducts != value)
+            {
+                _favoriteProducts = value;
+                OnPropertyChanged(nameof(FavoriteProducts));
+                UpdateEmptyStateVisibility();
+            }
+        }
+    }
 
-    public FavoritesPage(FirebaseAuthService authService)
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public FavoritesPage(FirebaseAuthService authService, FavoriteService favoriteService)
     {
         InitializeComponent();
-        _favorites = new List<Favorite>();
         _authService = authService;
+        _favoriteService = favoriteService;
+        FavoriteProducts = _favoriteService.FavoriteProducts;
+        BindingContext = this;
     }
 
-    private async Task LoadFavoritesAsync()
+    protected override async void OnAppearing()
     {
-        try
+        base.OnAppearing();
+        if (_authService.IsAuthenticated)
         {
-            if (_authService.IsAuthenticated)
-            {
-                await _favoriteService.LoadFavoritesForCurrentUserAsync();
-                _favorites = _favoriteService.GetFavorites();
-            }
-            else
-            {
-                _favorites = new List<Favorite>();
-                await DisplayAlert("Authentication Required", "Please sign in to view your favorites", "OK");
-                await Navigation.PopAsync();
-                return;
-            }
-            
-            UpdateFavoritesDisplay();
+            await _favoriteService.LoadFavoritesAsync(_authService.UserId);
+            OnPropertyChanged(nameof(FavoriteProducts));
         }
-        catch (Exception ex)
+        UpdateEmptyStateVisibility();
+    }
+
+    private void UpdateEmptyStateVisibility()
+    {
+        if (EmptyFavoritesLayout != null && FavoriteProductsView != null)
         {
-            await DisplayAlert("Error", "Failed to load favorites", "OK");
-            System.Diagnostics.Debug.WriteLine($"Error loading favorites: {ex.Message}");
+            bool isEmpty = FavoriteProducts == null || FavoriteProducts.Count == 0;
+            EmptyFavoritesLayout.IsVisible = isEmpty;
+            FavoriteProductsView.IsVisible = !isEmpty;
         }
     }
 
-    private void UpdateFavoritesDisplay()
+    private async void OnAddToFavoritesClicked(object sender, EventArgs e)
     {
-        if (_favorites.Any())
-        {
-            var displayItems = _favorites.Select(fav => new FavoriteDisplayItem
-            {
-                Id = fav.Id,
-                ProductId = fav.ProductId,
-                ProductName = fav.ProductName,
-                Brand = "Lacoste",
-                Color = "Light Orange",
-                Size = "S",
-                ImageUrl = fav.ImageUrl,
-                Price = fav.Price
-            }).ToList();
-            FavoritesListView.ItemsSource = displayItems;
-            FavoritesListView.IsVisible = true;
-            EmptyFavoritesLayout.IsVisible = false;
-        }
-        else
-        {
-            FavoritesListView.IsVisible = false;
-            EmptyFavoritesLayout.IsVisible = true;
-        }
+        // Exemplu: productId, productName, price, imageUrl
+        // await _favoriteService.AddToFavoritesForCurrentUserAsync(productId, productName, price, imageUrl);
+        // await LoadFavoritesFromFirebase();
     }
 
     private async void OnRemoveFavoriteClicked(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is FavoriteDisplayItem item)
         {
-            var result = await DisplayAlert("Remove Favorite", $"Are you sure you want to remove {item.ProductName} from favorites?", "Yes", "No");
-            if (result)
-            {
-                try
-                {
-                    await _favoriteService.RemoveFromFavoritesForCurrentUserAsync(item.ProductId);
-                    await LoadFavoritesAsync();
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", "Failed to remove favorite", "OK");
-                    System.Diagnostics.Debug.WriteLine($"Error removing favorite: {ex.Message}");
-                }
-            }
+            await _favoriteService.RemoveFromFavoritesForCurrentUserAsync(item.ProductId);
+            await _favoriteService.LoadFavoritesAsync(_authService.UserId);
+            OnPropertyChanged(nameof(FavoriteProducts));
         }
     }
 
@@ -101,7 +90,7 @@ public partial class FavoritesPage : ContentPage
                 var cartService = Handler.MauiContext.Services.GetService<CartService>();
                 if (cartService != null)
                 {
-                    await cartService.AddToCartForCurrentUserAsync(item.ProductId, item.ProductName, item.Price, item.ImageUrl);
+                    await cartService.LoadCartForCurrentUserAsync();
                     await DisplayAlert("Success", $"{item.ProductName} added to cart!", "OK");
                 }
             }

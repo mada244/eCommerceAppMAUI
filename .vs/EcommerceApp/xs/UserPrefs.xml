@@ -1,0 +1,55 @@
+﻿<Properties StartupConfiguration="{214177D5-50DB-40B6-9E9B-0A8E7FA5012C}|Default">
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="34.0.154" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.EcommerceApp PreferredExecutionTarget="Android.pixel_5_-_api_33" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.pixel_5_-_api_33" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Pages/FavoritesPage.xaml.cs">
+    <Files>
+      <File FileName="Services/FavoriteService.cs" Line="20" Column="1" />
+      <File FileName="Pages/FavoritesPage.xaml.cs" Line="40" Column="10" />
+      <File FileName="Pages/ProductDetailsPage.xaml.cs" Line="162" Column="29" />
+      <File FileName="Pages/StorePage.xaml.cs" Line="134" Column="29" />
+      <File FileName="Pages/MainPage.xaml.cs" Line="219" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="EcommerceApp">
+            <Node name="EcommerceApp">
+              <Node name="Pages" expanded="True">
+                <Node name="FavoritesPage.xaml" expanded="True">
+                  <Node name="FavoritesPage.xaml.cs" selected="True" />
+                </Node>
+                <Node name="MainPage.xaml" expanded="True" />
+                <Node name="ProductDetailsPage.xaml" expanded="True" />
+                <Node name="ProfilePage.xaml" expanded="True" />
+                <Node name="StorePage.xaml" expanded="True" />
+              </Node>
+              <Node name="Services" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Services/FirebaseController.cs" relfile="Services/FirebaseController.cs" line="17" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Services/FirebaseConfig.cs" relfile="Services/FirebaseConfig.cs" line="45" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Services/FirebaseConfig.cs" relfile="Services/FirebaseConfig.cs" line="12" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/ForgotPasswordPage.xaml.cs" relfile="Pages/ForgotPasswordPage.xaml.cs" line="32" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/ForgotPasswordPage.xaml.cs" relfile="Pages/ForgotPasswordPage.xaml.cs" line="18" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/ProductDetailsPage.xaml.cs" relfile="Pages/ProductDetailsPage.xaml.cs" line="185" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/FavoritesPage.xaml.cs" relfile="Pages/FavoritesPage.xaml.cs" line="27" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/SignInPage.xaml.cs" relfile="Pages/SignInPage.xaml.cs" line="11" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/MainPage.xaml.cs" relfile="Pages/MainPage.xaml.cs" line="11" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/FavoritesPage.xaml.cs" relfile="Pages/FavoritesPage.xaml.cs" line="68" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Services/FavoriteService.cs" relfile="Services/FavoriteService.cs" line="19" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Services/FavoriteService.cs" relfile="Services/FavoriteService.cs" line="37" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Services/FavoriteService.cs" relfile="Services/FavoriteService.cs" line="32" column="1" />
+      <Breakpoint file="/Users/madalinaciumac/Projects/test/EcommerceApp/Pages/FavoritesPage.xaml.cs" relfile="Pages/FavoritesPage.xaml.cs" line="38" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

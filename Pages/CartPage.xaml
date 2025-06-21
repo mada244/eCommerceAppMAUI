@@ -14,7 +14,7 @@
 
         <!-- Conținut principal scrollabil -->
         <Grid Grid.Row="1">
-            <CollectionView x:Name="CartListView" IsVisible="False" Margin="0,10,0,0">
+            <CollectionView x:Name="CartListView" IsVisible="False" Margin="0,10,0,0" ItemsSource="{Binding CartProducts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="5" 
@@ -83,7 +83,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <!-- Empty state -->
-            <VerticalStackLayout x:Name="EmptyCartLayout" VerticalOptions="Center" HorizontalOptions="Center" Spacing="30" IsVisible="True">
+            <VerticalStackLayout x:Name="EmptyCartLayout" VerticalOptions="Center" HorizontalOptions="Center" Spacing="30">
                 <Image Source="cart_empty.png" HeightRequest="180" WidthRequest="180"/>
                 <Label Text="Your cart is empty"
                        FontSize="26"

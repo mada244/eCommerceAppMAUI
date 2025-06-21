@@ -9,7 +9,7 @@ public partial class ProductDetailsPage : ContentPage
 {
 	private Product _product;
 	private FirebaseAuthService? _authService;
-	private CartService? _cartService;
+	private CartService _cartService;
 	private FavoriteService? _favoriteService;
 	private ObservableCollection<string> _imageUrls;
 	private ObservableCollection<string> _colors;
@@ -159,7 +159,7 @@ public partial class ProductDetailsPage : ContentPage
 			{
 				try
 				{
-					await _favoriteService?.LoadFavoritesForCurrentUserAsync();
+					//await _favoriteService?.GetFavoriteProductsAsync();
 					_isFavorite = _favoriteService?.IsFavorite(_product.Id) == true;
 					OnPropertyChanged(nameof(FavoriteIcon));
 				}
@@ -234,25 +234,17 @@ public partial class ProductDetailsPage : ContentPage
 		{
 			try
 			{
-				await _cartService?.AddToCartForCurrentUserAsync(
-					_product.Id,
-					_product.Name,
-					_product.Price,
-					_product.ImageUrl,
-					Quantity
-				);
-				
-				// Feedback vizual pentru utilizator
-				var button = sender as Button;
+				await _cartService.AddToCartAsync(_authService.UserId, _product.Id, Quantity);
+
+                var button = sender as Button;
 				if (button != null)
 				{
 					button.Text = "Added!";
 					button.BackgroundColor = Microsoft.Maui.Graphics.Colors.Green;
 					
-					// Reset după 2 secunde
 					await Task.Delay(2000);
 					button.Text = "Add to Cart";
-					button.BackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("#E91E63"); // AccentPink
+					button.BackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("#E91E63"); 
 				}
 				
 				await DisplayAlert("Success", $"Added {Quantity} item(s) to cart!", "OK");

@@ -4,50 +4,59 @@ using System.IO;
 using Microsoft.Maui.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Google.Cloud.Firestore;
+using System.Collections.ObjectModel;
 
 namespace EcommerceApp.Services
 {
     public class FavoriteService
     {
-        private string GetFileName(string userId) => Path.Combine(FileSystem.AppDataDirectory, $"favorites_{userId}.json");
         private List<Favorite> _favorites = new();
         private string _userId = string.Empty;
-        private FirebaseAuthService _authService = new FirebaseAuthService();
+        private FirebaseAuthService _authService;
 
-        public FavoriteService() {}
+        public FavoriteService(FirebaseAuthService authService) {
+            _authService = authService;
+        }
+
+        public ObservableCollection<Product> FavoriteProducts { get; set; } = new ObservableCollection<Product>();
 
         public async Task LoadFavoritesAsync(string userId)
         {
             if (string.IsNullOrEmpty(userId))
             {
-                System.Diagnostics.Debug.WriteLine("Cannot load favorites: UserId is null or empty");
+                System.Diagnostics.Debug.WriteLine("Cannot load favorites: User is not authenticated");
                 return;
             }
 
             _userId = userId;
             try
             {
-                // Pentru moment, folosim doar local storage
-                // TODO: Implement Firebase integration when needed
+                var db = FirebaseConfig.GetFirestoreDb();
+                var favCollection = db.Collection("users").Document(userId).Collection("favorites");
+                var productsCollection = db.Collection("Products");
 
+                var favSnapshot = await favCollection.GetSnapshotAsync();
+                FavoriteProducts.Clear();
+                foreach (var document in favSnapshot.Documents)
+                {
+                    var productId = document.Id;
+                    var productDoc = await productsCollection.Document(productId).GetSnapshotAsync();
+
+                    if (productDoc.Exists)
+                    {
+                        var product = productDoc.ConvertTo<Product>();
+                        FavoriteProducts.Add(product);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error loading favorites: {ex.Message}");
-                
             }
         }
 
-        public async Task LoadFavoritesForCurrentUserAsync()
-        {
-            if (!_authService.IsAuthenticated)
-            {
-                System.Diagnostics.Debug.WriteLine("Cannot load favorites: User is not authenticated");
-                return;
-            }
-
-            await LoadFavoritesAsync(_authService.UserId);
-        }
+        
 
         
         public List<Favorite> GetFavorites() => _favorites;
@@ -91,7 +100,7 @@ namespace EcommerceApp.Services
         {
             if (string.IsNullOrEmpty(userId))
             {
-                System.Diagnostics.Debug.WriteLine("Cannot remove from favorites: UserId is null or empty");
+                System.Diagnostics.Debug.WriteLine("Cannot remove from favorites: User is not authenticated");
                 return;
             }
 
@@ -136,9 +145,16 @@ namespace EcommerceApp.Services
             {
                 try
                 {
-                    // Pentru moment, salvează doar local
-                    // TODO: Implement Firebase integration when needed
-
+                    var db = FirebaseConfig.GetFirestoreDb();
+                    var favCollection = db.Collection("users").Document(_userId).Collection("favorites");
+                    // Șterge toate documentele existente
+                    var snapshot = await favCollection.GetSnapshotAsync();
+                    var deleteTasks = snapshot.Documents.Select(doc => doc.Reference.DeleteAsync());
+                    await Task.WhenAll(deleteTasks);
+                    // Adaugă toate favoritele actuale
+                    var addTasks = _favorites.Select(item =>
+                        favCollection.Document(item.ProductId).SetAsync(item));
+                    await Task.WhenAll(addTasks);
                 }
                 catch (Exception ex)
                 {

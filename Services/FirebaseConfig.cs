@@ -20,7 +20,7 @@ public class FirebaseConfig
             // Setăm variabila de mediu cu path-ul local
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", localPath);
 
-            _firestoreDb = FirestoreDb.Create("ecommerce-c7d1b");
+            _firestoreDb = FirestoreDb.Create("ecommerce-e5dfd");
             return _firestoreDb;
         }
         catch (Exception ex)

@@ -10,7 +10,7 @@ namespace EcommerceApp.Services
 {
     public class FirebaseAuthService
     {
-        private const string ApiKey = "AIzaSyBUfnN5tx3CbnITnW0Xh6btIen-b7Ne7uY"; 
+        private const string ApiKey = "AIzaSyC8m___OnwC7IF1LUXjarYvhB4USQtgvSg"; 
         private static readonly HttpClient _httpClient = new HttpClient();
         
         // Stochează token-ul de autentificare

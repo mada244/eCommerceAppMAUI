@@ -1,11 +1,3 @@
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/EcommerceApp.runtimeconfig.json
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/EcommerceApp.dll
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/EcommerceApp.pdb
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp.apk
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp.aab
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp-Signed.aab
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp-Signed.apk
-/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp-Signed.apk.idsig
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/build.props
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/adb.props
@@ -48,6 +40,8 @@
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable-xhdpi/dotnet_bot.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable-hdpi/dotnet_bot.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable-mdpi/dotnet_bot.png
+/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable/feature1.png
+/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable/favorite.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/mauiimage.stamp
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/libraryprojectimports.cache
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/stamp/_BuildLibraryImportsCache.stamp
@@ -126,6 +120,14 @@
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/EcommerceApp.AssemblyInfo.cs
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/EcommerceApp.csproj.CoreCompileInputs.cache
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/EcommerceApp.sourcelink.json
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/EcommerceApp.runtimeconfig.json
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/EcommerceApp.dll
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/EcommerceApp.pdb
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp.apk
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp.aab
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp-Signed.aab
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp-Signed.apk
+/Users/madalinaciumac/Projects/test/EcommerceApp/bin/Debug/net8.0-android/com.companyname.ecommerceapp-Signed.apk.idsig
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/XamlC.stamp
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/EcommerceApp.dll
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/EcommerceApp.pdb

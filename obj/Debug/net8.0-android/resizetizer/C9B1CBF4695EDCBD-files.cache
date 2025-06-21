@@ -4,6 +4,8 @@ obj/Debug/net8.0-android/resizetizer/r/mipmap-mdpi/appicon_background.png
 obj/Debug/net8.0-android/resizetizer/r/mipmap-hdpi/appicon_foreground.png
 obj/Debug/net8.0-android/resizetizer/r/mipmap-hdpi/appicon.png
 obj/Debug/net8.0-android/resizetizer/r/mipmap-hdpi/appicon_background.png
+obj/Debug/net8.0-android/resizetizer/r/drawable/feature1.png
+obj/Debug/net8.0-android/resizetizer/r/drawable/favorite.png
 obj/Debug/net8.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_foreground.png
 obj/Debug/net8.0-android/resizetizer/r/mipmap-xxxhdpi/appicon.png
 obj/Debug/net8.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_background.png

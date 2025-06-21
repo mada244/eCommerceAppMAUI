@@ -24,6 +24,7 @@ public partial class SignInPage : ContentPage
     {
         _isPasswordVisible = !_isPasswordVisible;
         PasswordEntry.IsPassword = !_isPasswordVisible;
+        ShowHideButton.Text = _isPasswordVisible ? "Hide" : "Show";
     }
 
     private async void OnSignInClicked(object sender, EventArgs e)

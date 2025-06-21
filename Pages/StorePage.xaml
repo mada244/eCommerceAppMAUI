@@ -1,70 +1,73 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.StorePage"
-             BackgroundColor="White">
+             BackgroundColor="#d2c4ad">
     <Grid RowDefinitions="Auto,*,Auto">
         <!-- Titlu -->
         <Label Text="Store"
-               FontSize="24"
+               FontSize="28"
                FontAttributes="Bold"
+               TextColor="#2d2233"
                HorizontalOptions="Center"
-               Margin="0,20,0,10"/>
+               Margin="0,32,0,10"/>
 
         <!-- Conținut principal -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="18" Padding="0,0,0,0">
                 <!-- Search Bar -->
-                <SearchBar Placeholder="Search"
-                           Margin="16,0,16,10"
-                           BackgroundColor="#f2f2f2"
-                           HeightRequest="44"
-                           x:Name="SearchBar"
-                           TextChanged="OnSearchTextChanged"/>
+                <Frame BackgroundColor="#f3f1ee" CornerRadius="18" Padding="0" Margin="16,0,16,10" HasShadow="False">
+                    <SearchBar Placeholder="Search"
+                               BackgroundColor="Transparent"
+                               HeightRequest="44"
+                               x:Name="SearchBar"
+                               TextChanged="OnSearchTextChanged"
+                               FontSize="16"
+                               TextColor="#2d2233"/>
+                </Frame>
 
                 <!-- Lista de produse -->
                 <CollectionView x:Name="ProductsCollection" ItemsSource="{Binding Products}" Margin="16,0,16,0">
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="16" VerticalItemSpacing="16"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame BackgroundColor="White" CornerRadius="15" Padding="0" HasShadow="True">
+                            <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="OnProductTapped"/>
                                 </Frame.GestureRecognizers>
                                 <VerticalStackLayout>
-                                    <Image Source="{Binding ImageUrl}" Aspect="AspectFill" HeightRequest="150"/>
+                                    <Frame BackgroundColor="#f3f1ee" CornerRadius="14" Padding="0" HasShadow="False" Margin="10,10,10,0">
+                                        <Image Source="{Binding ImageUrl}" Aspect="AspectFill" HeightRequest="140" WidthRequest="140"/>
+                                    </Frame>
                                     <VerticalStackLayout Padding="10">
-                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
-                                        <Label Text="{Binding Description}" FontSize="12" TextColor="Gray" LineBreakMode="TailTruncation"/>
-                                        <Label Text="{Binding Price, StringFormat='$ {0:F2}'}" FontSize="18" TextColor="#7a0026" FontAttributes="Bold" Margin="0,5,0,0"/>
-                                        
+                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="#2d2233" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Description}" FontSize="12" TextColor="#7B7B7B" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Price, StringFormat='$ {0:F2}'}" FontSize="18" TextColor="#2d2233" FontAttributes="Bold" Margin="0,5,0,0"/>
                                         <!-- Butoane pentru Add to Cart și Favorite -->
                                         <Grid Margin="0,10,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            
                                             <Button Grid.Column="0" 
                                                     Text="Add to Cart" 
-                                                    BackgroundColor="#7a0026" 
+                                                    BackgroundColor="Black" 
                                                     TextColor="White" 
-                                                    CornerRadius="20" 
-                                                    HeightRequest="36" 
+                                                    CornerRadius="18" 
+                                                    HeightRequest="40" 
                                                     Margin="0,0,5,0"
                                                     CommandParameter="{Binding .}"
+                                                    FontSize="15"
                                                     Clicked="OnAddToCartClicked"/>
-                                            
-                                            <Button Grid.Column="1" 
-                                                    Text="❤" 
-                                                    BackgroundColor="Transparent" 
-                                                    TextColor="#7a0026" 
-                                                    FontSize="20" 
-                                                    WidthRequest="40" 
-                                                    HeightRequest="36"
-                                                    CommandParameter="{Binding .}"
-                                                    Clicked="OnFavoriteClicked"/>
+                                            <ImageButton Grid.Column="1"
+                                                         Source="favorite.png"
+                                                         BackgroundColor="Transparent"
+                                                         WidthRequest="32"
+                                                         HeightRequest="32"
+                                                         Padding="0"
+                                                         CommandParameter="{Binding .}"
+                                                         Clicked="OnFavoriteClicked"/>
                                         </Grid>
                                     </VerticalStackLayout>
                                 </VerticalStackLayout>
@@ -76,7 +79,7 @@
         </ScrollView>
 
         <!-- Bara de navigare jos -->
-        <Grid Grid.Row="2" Padding="0" HeightRequest="70" BackgroundColor="#f6eddb">
+        <Grid Grid.Row="2" Padding="0" HeightRequest="70" BackgroundColor="#f3f1ee">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -84,11 +87,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Text="🏠" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnHomeClicked"/>
-            <Button Grid.Column="1" Text="🛍️" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnStoreClicked"/>
-            <Button Grid.Column="2" Text="❤️" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnFavoriteClicked"/>
-            <Button Grid.Column="3" Text="🛒" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnCartClicked"/>
-            <Button Grid.Column="4" Text="👤" FontSize="18" BackgroundColor="Transparent" TextColor="#7a0026" Clicked="OnProfileClicked"/>
+            <Button Grid.Column="0" Text="🏠" FontSize="18" BackgroundColor="Transparent" TextColor="#2d2233" Clicked="OnHomeClicked"/>
+            <Button Grid.Column="1" Text="🛍️" FontSize="18" BackgroundColor="Transparent" TextColor="#2d2233" Clicked="OnStoreClicked"/>
+            <Button Grid.Column="2" Text="❤️" FontSize="18" BackgroundColor="Transparent" TextColor="#2d2233" Clicked="OnFavoriteClicked"/>
+            <Button Grid.Column="3" Text="🛒" FontSize="18" BackgroundColor="Transparent" TextColor="#2d2233" Clicked="OnCartClicked"/>
+            <Button Grid.Column="4" Text="👤" FontSize="18" BackgroundColor="Transparent" TextColor="#2d2233" Clicked="OnProfileClicked"/>
         </Grid>
     </Grid>
 </ContentPage> 

@@ -12,22 +12,16 @@
 
         <!-- Conținut principal -->
         <Grid Grid.Row="1">
-            <ListView x:Name="FavoritesListView" IsVisible="False" Margin="0,10,0,0">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="FavoriteProductsView" ItemsSource="{Binding FavoriteProducts}" Margin="0,10,0,0" IsVisible="False">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="16,8,16,8" Padding="12" CornerRadius="18" HasShadow="True" BackgroundColor="White">
                             <Grid ColumnDefinitions="120,*,Auto" RowDefinitions="Auto,Auto,Auto">
                                 <!-- Imagine produs -->
                                 <Image Grid.RowSpan="3" Grid.Column="0" Source="{Binding ImageUrl}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center"/>
                                 <!-- Titlu și brand -->
-                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding ProductName}" FontSize="18" FontAttributes="Bold" TextColor="#2d2233"/>
-                                <Label Grid.Column="1" Grid.Row="1" Text="Lacoste" FontSize="14" TextColor="#6c6172"/>
-                                <!-- Buline de culoare (exemplu static) -->
-                                <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Spacing="10" Margin="0,8,0,0">
-                                    <Frame BackgroundColor="#ffb300" HeightRequest="20" WidthRequest="20" CornerRadius="10" Padding="0"/>
-                                    <Frame BackgroundColor="#43a047" HeightRequest="20" WidthRequest="20" CornerRadius="10" Padding="0"/>
-                                    <Frame BackgroundColor="#1976d2" HeightRequest="20" WidthRequest="20" CornerRadius="10" Padding="0"/>
-                                </StackLayout>
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="#2d2233"/>
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Brand}" FontSize="14" TextColor="#6c6172"/>
                                 <!-- Prețuri -->
                                 <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Vertical" HorizontalOptions="End" Margin="0,0,0,0">
                                     <Label Text="{Binding Price, StringFormat='$ {0:F2}'}" FontSize="18" TextColor="#f44336" FontAttributes="Bold"/>
@@ -54,10 +48,10 @@
                             </Grid>
                         </Frame>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <!-- Empty state -->
-            <StackLayout x:Name="EmptyFavoritesLayout" IsVisible="True" VerticalOptions="Center">
+            <StackLayout x:Name="EmptyFavoritesLayout" VerticalOptions="Center">
                 <Label Text="Your favorite list is empty"
                        FontSize="26"
                        TextColor="#7a0026"

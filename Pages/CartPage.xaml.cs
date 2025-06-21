@@ -3,78 +3,109 @@ using EcommerceApp.Services;
 using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace EcommerceApp;
 
-public partial class CartPage : ContentPage
+public partial class CartPage : ContentPage, INotifyPropertyChanged
 {
     private FirebaseAuthService _authService;
     private CartService _cartService;
-    private List<CartItem> _cartItems;
+    public ObservableCollection<CartItem> CartItems { get; set; } = new ObservableCollection<CartItem>();
+    private ObservableCollection<Product> _cartProducts;
+    public ObservableCollection<Product> CartProducts
+    {
+        get => _cartProducts;
+        set
+        {
+            if (_cartProducts != value)
+            {
+                _cartProducts = value;
+                OnPropertyChanged(nameof(CartProducts));
+                UpdateEmptyStateVisibility();
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     public CartPage(FirebaseAuthService authService, CartService cartService)
     {
         InitializeComponent();
-        _cartItems = new List<CartItem>();
         _authService = authService;
         _cartService = cartService;
-        // Nu inițializa serviciile aici!
+        CartProducts = _cartService.CartProduct;
+        BindingContext = this;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        try
+        if (_authService.IsAuthenticated)
         {
-            await LoadCartItemsAsync();
+            await _cartService.LoadCartForCurrentUserAsync();
+            OnPropertyChanged(nameof(CartProducts));
         }
-        catch (Exception ex)
+        UpdateEmptyStateVisibility();
+    }
+
+    private void UpdateEmptyStateVisibility()
+    {
+        if (EmptyCartLayout != null && CartListView != null)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            bool isEmpty = CartProducts == null || CartProducts.Count == 0;
+            EmptyCartLayout.IsVisible = isEmpty;
+            CartListView.IsVisible = !isEmpty;
         }
     }
 
-
-    private async Task LoadCartItemsAsync()
+    private async Task LoadCartFromFirebase()
     {
-        try
+        if (_authService.IsAuthenticated)
         {
-            if (_authService.IsAuthenticated)
+            await _cartService.LoadCartForCurrentUserAsync();
+            CartItems.Clear();
+            foreach (var item in _cartService.GetCartItems())
             {
-                await _cartService.LoadCartForCurrentUserAsync();
-                _cartItems = _cartService.GetCartItems();
+                CartItems.Add(item);
             }
-            else
-            {
-                _cartItems = new List<CartItem>();
-                await DisplayAlert("Authentication Required", "Please sign in to view your cart", "OK");
-                await Navigation.PopAsync();
-                return;
-            }
+            OnPropertyChanged(nameof(CartItems));
+        }
+    }
 
-            UpdateCartDisplay();
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", "Failed to load cart items", "OK");
-            System.Diagnostics.Debug.WriteLine($"Error loading cart: {ex.Message}");
-        }
+    private async void OnAddToCartClicked(object sender, EventArgs e)
+    {
+        // Exemplu: productId, quantity
+        // await _cartService.AddToCartForCurrentUserAsync(productId, quantity);
+        // await LoadCartFromFirebase();
+    }
+
+    private async void OnRemoveFromCartClicked(object sender, EventArgs e)
+    {
+        // Exemplu: productId
+        // await _cartService.RemoveFromCartAsync(_authService.UserId, productId);
+        // await LoadCartFromFirebase();
+    }
+
+    private async void OnUpdateQuantityClicked(object sender, EventArgs e)
+    {
+        // Exemplu: productId, newQuantity
+        // await _cartService.UpdateQuantityAsync(_authService.UserId, productId, newQuantity);
+        // await LoadCartFromFirebase();
     }
 
     private void UpdateCartDisplay()
     {
-        if (_cartItems.Any())
+        if (CartItems.Any())
         {
-            var displayItems = _cartItems.Select(item => new CartDisplayItem
+            var displayItems = CartItems.Select(item => new CartDisplayItem
             {
-                Id = item.Id,
-                ProductName = item.ProductName,
-                Brand = "Lacoste",
-                Color = "Light Orange",
-                Size = "S",
-                ImageUrl = item.ImageUrl,
-                Price = item.Price,
+                Id = item.ProductId,
                 Quantity = item.Quantity
             }).ToList();
             CartListView.ItemsSource = displayItems;
@@ -108,7 +139,7 @@ public partial class CartPage : ContentPage
         {
             try
             {
-                var cartItem = _cartItems.FirstOrDefault(x => x.Id == item.Id);
+                var cartItem = CartItems.FirstOrDefault(x => x.ProductId == item.Id);
                 if (cartItem != null)
                 {
                     if (cartItem.Quantity > 1)
@@ -119,7 +150,7 @@ public partial class CartPage : ContentPage
                     {
                         await _cartService.RemoveFromCartAsync(_authService.UserId, item.Id);
                     }
-                    await LoadCartItemsAsync();
+                    await LoadCartFromFirebase();
                 }
             }
             catch (Exception ex)
@@ -136,11 +167,11 @@ public partial class CartPage : ContentPage
         {
             try
             {
-                var cartItem = _cartItems.FirstOrDefault(x => x.Id == item.Id);
+                var cartItem = CartItems.FirstOrDefault(x => x.ProductId == item.Id);
                 if (cartItem != null)
                 {
                     await _cartService.UpdateQuantityAsync(_authService.UserId, item.Id, cartItem.Quantity + 1);
-                    await LoadCartItemsAsync();
+                    await LoadCartFromFirebase();
                 }
             }
             catch (Exception ex)
@@ -161,7 +192,7 @@ public partial class CartPage : ContentPage
                 try
                 {
                     await _cartService.RemoveFromCartAsync(_authService.UserId, item.Id);
-                    await LoadCartItemsAsync();
+                    await LoadCartFromFirebase();
                 }
                 catch (Exception ex)
                 {
@@ -194,9 +225,9 @@ public partial class CartPage : ContentPage
 
     private async void OnCheckoutClicked(object sender, EventArgs e)
     {
-        if (_cartItems.Any())
+        if (CartItems.Any())
         {
-            await Navigation.PushAsync(new CheckoutPage(_cartItems));
+            await Navigation.PushAsync(new CheckoutPage(CartItems.ToList()));
         }
         else
         {

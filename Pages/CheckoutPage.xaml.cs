@@ -23,8 +23,8 @@ public partial class CheckoutPage : ContentPage
 	private void LoadOrderSummary()
 	{
 		OrderItemsView.ItemsSource = _cartItems;
-		var total = _cartItems.Sum(item => item.Price * item.Quantity);
-		TotalLabel.Text = $"${total:F2}";
+		//var total = _cartItems.Sum(item => item.Price * item.Quantity);
+		//TotalLabel.Text = $"${total:F2}";
 	}
 
 	private void PreFillUserData()
@@ -78,7 +78,7 @@ public partial class CheckoutPage : ContentPage
 			{
 				UserId = _authService.UserId ?? "anonymous",
 				Items = new List<CartItem>(_cartItems),
-				TotalAmount = _cartItems.Sum(item => item.Price * item.Quantity),
+				//TotalAmount = _cartItems.Sum(item => item.Price * item.Quantity),
 				Status = "Pending",
 				ShippingAddress = $"{AddressEntry.Text}, {CityEntry.Text}",
 				PhoneNumber = PhoneEntry.Text,

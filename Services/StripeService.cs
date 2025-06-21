@@ -121,7 +121,7 @@ namespace EcommerceApp.Services
             try
             {
                 // Calculează totalul comenzii
-                double totalAmount = order.Items.Sum(item => item.Price * item.Quantity);
+               double totalAmount = order.Items.Sum(item => 4 * item.Quantity);
 
                 // Creează PaymentIntent
                 var paymentIntent = await CreatePaymentIntentAsync(totalAmount);
@@ -133,6 +133,7 @@ namespace EcommerceApp.Services
                 var confirmedPayment = await ConfirmPaymentIntentAsync(paymentIntent.Id, paymentMethod.Id);
 
                 return confirmedPayment.Status == "succeeded";
+             
             }
             catch (Exception ex)
             {

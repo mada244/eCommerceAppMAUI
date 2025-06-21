@@ -1,12 +1,13 @@
+using Google.Cloud.Firestore;
+
 namespace EcommerceApp.Models
 {
+    [FirestoreData]
     public class CartItem
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        [FirestoreProperty]
         public string ProductId { get; set; }
-        public string ProductName { get; set; }
-        public double Price { get; set; }
+        [FirestoreProperty]
         public int Quantity { get; set; }
-        public string ImageUrl { get; set; }
     }
 } 

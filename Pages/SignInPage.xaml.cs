@@ -31,8 +31,9 @@ public partial class SignInPage : ContentPage
     {
         try
         {
-            string email = EmailEntry.Text;
-            string password = PasswordEntry.Text;
+            //TODO: remove hardcoded login
+            string email = EmailEntry.Text ?? "test99@gmail.com";
+            string password = PasswordEntry.Text ?? "test99";
 
             // Verific dacă email-ul și parola sunt completate
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))

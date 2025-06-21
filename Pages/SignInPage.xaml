@@ -1,4 +1,4 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.SignInPage"
              BackgroundColor="#d2c4ad">
@@ -45,7 +45,8 @@
                     HeightRequest="60"
                     Clicked="OnSignInClicked"
                     WidthRequest="320"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    />
             <!-- Forgot Password -->
             <Button Text="Forgot password ?"
                     x:Name="ForgotPasswordButton"

@@ -105,20 +105,16 @@ public partial class ProductDetailsPage : ContentPage
 	{
 		try
 		{
-			// Adaug imaginea principală a produsului
 			_imageUrls.Add(_product.ImageUrl);
-			
-			// Adaug imagini suplimentare pentru carusel (dacă există)
+
 			if (_product.ImageUrl != null)
 			{
-				// Simulez imagini suplimentare pentru demo
 				_imageUrls.Add(_product.ImageUrl);
 				_imageUrls.Add(_product.ImageUrl);
 			}
 			
 			SelectedImage = _imageUrls.FirstOrDefault();
 			
-			// Adaug culorile disponibile
 			if (_product.Colors != null && _product.Colors.Any())
 			{
 				foreach (var color in _product.Colors)
@@ -128,7 +124,6 @@ public partial class ProductDetailsPage : ContentPage
 			}
 			else
 			{
-				// Culori default
 				_colors.Add("Red");
 				_colors.Add("Blue");
 				_colors.Add("Green");
@@ -136,7 +131,6 @@ public partial class ProductDetailsPage : ContentPage
 			}
 			SelectedColor = _colors.FirstOrDefault();
 			
-			// Adaug mărimile disponibile
 			if (_product.Sizes != null && _product.Sizes.Any())
 			{
 				foreach (var size in _product.Sizes)

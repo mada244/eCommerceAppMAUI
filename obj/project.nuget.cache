@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VjutStIshcA=",
+  "dgSpecHash": "8mDlAM6E4d0=",
   "success": true,
   "projectFilePath": "/Users/madalinaciumac/Projects/test/EcommerceApp/EcommerceApp.csproj",
   "expectedPackageFiles": [
@@ -46,7 +46,7 @@
     "/Users/madalinaciumac/.nuget/packages/microsoft.maui.essentials/8.0.3/microsoft.maui.essentials.8.0.3.nupkg.sha512",
     "/Users/madalinaciumac/.nuget/packages/microsoft.maui.graphics/8.0.3/microsoft.maui.graphics.8.0.3.nupkg.sha512",
     "/Users/madalinaciumac/.nuget/packages/microsoft.maui.resizetizer/8.0.3/microsoft.maui.resizetizer.8.0.3.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.net.illink.tasks/8.0.15/microsoft.net.illink.tasks.8.0.15.nupkg.sha512",
+    "/Users/madalinaciumac/.nuget/packages/microsoft.net.illink.tasks/8.0.6/microsoft.net.illink.tasks.8.0.6.nupkg.sha512",
     "/Users/madalinaciumac/.nuget/packages/microsoft.netcore.jit/1.0.2/microsoft.netcore.jit.1.0.2.nupkg.sha512",
     "/Users/madalinaciumac/.nuget/packages/microsoft.netcore.platforms/1.0.1/microsoft.netcore.platforms.1.0.1.nupkg.sha512",
     "/Users/madalinaciumac/.nuget/packages/microsoft.netcore.portable.compatibility/1.0.1/microsoft.netcore.portable.compatibility.1.0.1.nupkg.sha512",
@@ -334,17 +334,7 @@
     "/Users/madalinaciumac/.nuget/packages/xamarin.kotlin.stdlib.jdk8/1.9.0.1/xamarin.kotlin.stdlib.jdk8.1.9.0.1.nupkg.sha512",
     "/Users/madalinaciumac/.nuget/packages/xamarin.kotlinx.coroutines.android/1.7.2.1/xamarin.kotlinx.coroutines.android.1.7.2.1.nupkg.sha512",
     "/Users/madalinaciumac/.nuget/packages/xamarin.kotlinx.coroutines.core.jvm/1.7.2.1/xamarin.kotlinx.coroutines.core.jvm.1.7.2.1.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/xamarin.protobuf.javalite/3.21.1/xamarin.protobuf.javalite.3.21.1.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.netcore.app.ref/8.0.15/microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.15/microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.netcore.app.ref/8.0.15/microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.15/microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.ios.ref.net8.0_18.0/18.0.8324/microsoft.ios.ref.net8.0_18.0.18.0.8324.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.ios.runtime.iossimulator-arm64.net8.0_18.0/18.0.8324/microsoft.ios.runtime.iossimulator-arm64.net8.0_18.0.18.0.8324.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.netcore.app.ref/8.0.15/microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.15/microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.maccatalyst.ref.net8.0_18.0/18.0.8324/microsoft.maccatalyst.ref.net8.0_18.0.18.0.8324.nupkg.sha512",
-    "/Users/madalinaciumac/.nuget/packages/microsoft.maccatalyst.runtime.maccatalyst-arm64.net8.0_18.0/18.0.8324/microsoft.maccatalyst.runtime.maccatalyst-arm64.net8.0_18.0.18.0.8324.nupkg.sha512"
+    "/Users/madalinaciumac/.nuget/packages/xamarin.protobuf.javalite/3.21.1/xamarin.protobuf.javalite.3.21.1.nupkg.sha512"
   ],
   "logs": []
 }

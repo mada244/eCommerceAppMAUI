@@ -48,8 +48,8 @@
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable-xhdpi/dotnet_bot.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable-hdpi/dotnet_bot.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable-mdpi/dotnet_bot.png
-/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable/feature1.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable/favorite.png
+/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/resizetizer/r/drawable/feature1.png
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/mauiimage.stamp
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/libraryprojectimports.cache
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/stamp/_BuildLibraryImportsCache.stamp
@@ -347,7 +347,6 @@
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.Numerics.dll
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.Numerics.Vectors.dll
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.ObjectModel.dll
-/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.Private.CoreLib.dll
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.Private.DataContractSerialization.dll
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.Private.Uri.dll
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.Private.Xml.dll
@@ -1353,3 +1352,4 @@
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/app_shared_libraries/armeabi-v7a/libxamarin-app.so
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/app_shared_libraries/x86/libxamarin-app.so
 /Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/app_shared_libraries/x86_64/libxamarin-app.so
+/Users/madalinaciumac/Projects/test/EcommerceApp/obj/Debug/net8.0-android/android/assets/System.Private.CoreLib.dll

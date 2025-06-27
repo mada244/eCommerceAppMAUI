@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System;
 
 namespace EcommerceApp;
 
@@ -189,7 +190,7 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
 
     private async void OnCartClicked(object sender, EventArgs e)
     {
-        // Deja pe pagina de cart
+        
     }
 
     private async void OnCheckoutClicked(object sender, EventArgs e)
@@ -211,7 +212,7 @@ public partial class CartPage : ContentPage, INotifyPropertyChanged
 
     private void OnPlaceOrderClicked(object sender, EventArgs e)
     {
-        // Handler gol pentru compatibilitate XAML
+
     }
 
     private async void OnProfileClicked(object sender, EventArgs e)

@@ -5,8 +5,8 @@ namespace EcommerceApp.Services
 {
     public class StripeService
     {
-        private const string StripeSecretKey = "sk_test_..."; // Înlocuiește cu cheia ta Stripe Secret Key
-        private const string StripePublishableKey = "pk_test_..."; // Înlocuiește cu cheia ta Stripe Publishable Key
+        private const string StripeSecretKey = "sk_test_..."; 
+        private const string StripePublishableKey = "pk_test_..."; 
 
         public StripeService()
         {
@@ -19,7 +19,7 @@ namespace EcommerceApp.Services
             {
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = (long)(amount * 100), // Stripe folosește cenți
+                    Amount = (long)(amount * 100), 
                     Currency = currency,
                     AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
                     {
@@ -120,16 +120,12 @@ namespace EcommerceApp.Services
         {
             try
             {
-                // Calculează totalul comenzii
                double totalAmount = order.Items.Sum(item => 4 * item.Quantity);
-
-                // Creează PaymentIntent
                 var paymentIntent = await CreatePaymentIntentAsync(totalAmount);
 
-                // Creează PaymentMethod
                 var paymentMethod = await CreatePaymentMethodAsync(cardNumber, expMonth, expYear, cvc);
 
-                // Confirmă plata
+
                 var confirmedPayment = await ConfirmPaymentIntentAsync(paymentIntent.Id, paymentMethod.Id);
 
                 return confirmedPayment.Status == "succeeded";

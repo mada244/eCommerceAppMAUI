@@ -1,32 +1,26 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.FavoritesPage"
              BackgroundColor="#fdf7ee">
     <Grid RowDefinitions="Auto,*,Auto">
-        <!-- Titlu -->
         <Label Text="Favorites"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center"
                Margin="0,20,0,10"/>
 
-        <!-- Conținut principal -->
         <Grid Grid.Row="1">
             <CollectionView x:Name="FavoriteProductsView" ItemsSource="{Binding FavoriteProducts}" Margin="0,10,0,0" IsVisible="False">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="16,8,16,8" Padding="12" CornerRadius="18" HasShadow="True" BackgroundColor="White">
                             <Grid ColumnDefinitions="120,*,Auto" RowDefinitions="Auto,Auto,Auto">
-                                <!-- Imagine produs -->
                                 <Image Grid.RowSpan="3" Grid.Column="0" Source="{Binding ImageUrl}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                <!-- Titlu și brand -->
                                 <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="#2d2233"/>
                                 <Label Grid.Column="1" Grid.Row="1" Text="{Binding Brand}" FontSize="14" TextColor="#6c6172"/>
-                                <!-- Prețuri -->
                                 <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Vertical" HorizontalOptions="End" Margin="0,0,0,0">
                                     <Label Text="{Binding Price, StringFormat='$ {0:F2}'}" FontSize="18" TextColor="#f44336" FontAttributes="Bold"/>
                                 </StackLayout>
-                                <!-- Butoane acțiuni -->
                                 <StackLayout Grid.Column="2" Grid.RowSpan="3" Orientation="Vertical" Spacing="8" VerticalOptions="Center">
                                     <Button Text="Add to Cart" 
                                             BackgroundColor="#4CAF50" 
@@ -50,7 +44,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!-- Empty state -->
             <StackLayout x:Name="EmptyFavoritesLayout" VerticalOptions="Center">
                 <Label Text="Your favorite list is empty"
                        FontSize="26"
@@ -64,7 +57,6 @@
             </StackLayout>
         </Grid>
 
-        <!-- Bara de navigare jos -->
         <Grid Grid.Row="2" Padding="0" HeightRequest="70" BackgroundColor="#f6eddb">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

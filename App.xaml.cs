@@ -10,7 +10,6 @@ public partial class App : Application
 	{
         ServiceProvider = serviceProvider;
         InitializeComponent();
-		// Inițializez pagina principală cu un loader temporar
 		MainPage = new ContentPage { Content = new ActivityIndicator { IsRunning = true, VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center } };
 		_ = InitializeAppAsync();
 	}

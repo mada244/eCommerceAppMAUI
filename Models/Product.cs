@@ -25,8 +25,8 @@ namespace EcommerceApp.Models
         [FirestoreProperty]
         public List<string> Sizes { get; set; } = new();
         [FirestoreProperty]
-        public List<string> ImageUrls { get; set; } = new(); // pentru carusel imagini
+        public List<string> ImageUrls { get; set; } = new(); 
         [FirestoreProperty]
-        public List<string> Variants { get; set; } = new(); // opțional, pentru extensibilitate
+        public List<string> Variants { get; set; } = new(); 
     }
 } 

@@ -57,7 +57,7 @@ public partial class ProfilePage : ContentPage, INotifyPropertyChanged
 
         if (_authService.IsAuthenticated)
         {
-            UserName = _authService.UserId; // Înlocuiește cu numele real dacă este disponibil
+            UserName = _authService.UserId; 
             UserEmail = _authService.UserEmail;
             IsAuthenticated = true;
         }
@@ -93,13 +93,10 @@ public partial class ProfilePage : ContentPage, INotifyPropertyChanged
 protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        // Asigură-te că autentificarea este actualizată
         //await _authService.LoadAuthStateAsync();
 
         if (_authService.IsAuthenticated)
         {
-            // Obține detaliile utilizatorului din serviciu
             UserEmail = _authService.UserEmail ?? "Email not available";
             UserName = UserEmail.Contains("@") ? UserEmail.Split('@')[0] : "Guest";
         }
@@ -109,7 +106,6 @@ protected override async void OnAppearing()
             UserName = "Guest";
         }
 
-        // Notifică schimbările pentru binding
         OnPropertyChanged(nameof(UserEmail));
         OnPropertyChanged(nameof(UserName));
     }

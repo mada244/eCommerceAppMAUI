@@ -29,7 +29,6 @@ public partial class MainPage : ContentPage
 	protected override async void OnAppearing()
 	{
 		base.OnAppearing();
-		// Reîncarcă numărul de produse din coș când utilizatorul revine la această pagină
 		await LoadCartCountAsync();
 	}
 
@@ -42,21 +41,17 @@ public partial class MainPage : ContentPage
 	{
 		try
 		{
-			// Așteptăm să ne asigurăm că Firebase este inițializat
 			await FirebaseConfig.InitializeFirestoreAsync();
 			
 			_authService = new FirebaseAuthService();
 			_productService = new FirebaseProductService();
 			
 			var allProducts = await _productService.GetAllProductsAsync();
-			
-			// Produse pentru Summer Sale (primele 3)
+
 			var summerSaleProducts = allProducts.Take(3).Select(p => new ProductViewModel(p, 20)).ToList();
 
-			// Produse pentru New Arrivals (următoarele 3)
 			var newArrivalProducts = allProducts.Skip(3).Take(3).Select(p => new ProductViewModel(p)).ToList();
 
-			// Actualizăm UI-ul pe thread-ul principal
 			MainThread.BeginInvokeOnMainThread(() =>
 			{
 				_summerSaleProducts.Clear();

@@ -31,28 +31,23 @@ public partial class SignInPage : ContentPage
     {
         try
         {
-            //TODO: remove hardcoded login
-            string email = EmailEntry.Text ?? "test99@gmail.com";
-            string password = PasswordEntry.Text ?? "test99";
+            string email = EmailEntry.Text;
+            string password = PasswordEntry.Text;
 
-            // Verific dacă email-ul și parola sunt completate
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
                 await DisplayAlert("Error", "Please enter both email and password", "OK");
                 return;
             }
 
-            // Inițializez serviciul de autentificare dacă nu există
 
             bool success = await _authService.SignInAsync(email, password);
             if (success)
             {
-                // Inițializez Firebase și serviciile după autentificare reușită
                 await FirebaseConfig.InitializeFirestoreAsync();
                 _userService = new UserService();
                 _productService = new FirebaseProductService();
 
-                // Navighez către pagina principală
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
             else

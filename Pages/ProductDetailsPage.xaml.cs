@@ -140,7 +140,6 @@ public partial class ProductDetailsPage : ContentPage
 			}
 			else
 			{
-				// Mărimi default
 				_sizes.Add("S");
 				_sizes.Add("M");
 				_sizes.Add("L");
@@ -148,7 +147,6 @@ public partial class ProductDetailsPage : ContentPage
 			}
 			SelectedSize = _sizes.FirstOrDefault();
 			
-			// Verific dacă produsul este în favorite
 			if (_authService?.IsAuthenticated == true)
 			{
 				try

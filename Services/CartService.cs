@@ -171,8 +171,6 @@ namespace EcommerceApp.Services
 
         public double GetCartTotal()
         {
-            // This needs product info, which is not stored in _cartItems.
-            // A better implementation would be to calculate this based on CartProduct and _cartItems.
             return 0;
         }
 

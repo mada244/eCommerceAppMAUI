@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.RegisterPage"
              BackgroundColor="#d2c4ad">
     <ScrollView>
         <VerticalStackLayout Padding="30,0,30,0" Spacing="24" VerticalOptions="CenterAndExpand" HeightRequest="700">
-            <!-- Logo sus -->
             <Image Source="logo.png"
                    HeightRequest="120"
                    WidthRequest="120"
                    HorizontalOptions="Center"
                    Margin="0,0,0,0"/>
-            <!-- First Name Entry modern -->
             <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True" Margin="0,0,0,0" HorizontalOptions="Center" WidthRequest="320">
                 <HorizontalStackLayout Spacing="0" Padding="18,0">
                     <Label Text="👤" VerticalOptions="Center" FontSize="20"/>
@@ -23,7 +21,6 @@
                            WidthRequest="240"/>
                 </HorizontalStackLayout>
             </Frame>
-            <!-- Last Name Entry modern -->
             <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True" Margin="0,0,0,0" HorizontalOptions="Center" WidthRequest="320">
                 <HorizontalStackLayout Spacing="0" Padding="18,0">
                     <Label Text="👤" VerticalOptions="Center" FontSize="20"/>
@@ -35,7 +32,6 @@
                            WidthRequest="240"/>
                 </HorizontalStackLayout>
             </Frame>
-            <!-- Email Entry modern -->
             <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True" Margin="0,0,0,0" HorizontalOptions="Center" WidthRequest="320">
                 <HorizontalStackLayout Spacing="0" Padding="18,0">
                     <Label Text="📧" VerticalOptions="Center" FontSize="20"/>
@@ -47,7 +43,6 @@
                            WidthRequest="240"/>
                 </HorizontalStackLayout>
             </Frame>
-            <!-- Password Entry modern -->
             <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True" Margin="0,0,0,0" HorizontalOptions="Center" WidthRequest="320">
                 <HorizontalStackLayout Spacing="0" Padding="18,0">
                     <Label Text="🔒" VerticalOptions="Center" FontSize="20"/>
@@ -61,7 +56,6 @@
                     <Button x:Name="ShowHideButton" Text="Show" BackgroundColor="Transparent" TextColor="Black" FontSize="16" WidthRequest="80" HeightRequest="36" Padding="8,0" HorizontalOptions="End" VerticalOptions="Center" Clicked="OnTogglePasswordVisibility"/>
                 </HorizontalStackLayout>
             </Frame>
-            <!-- Sign Up Button modern -->
             <Button Text="Sign Up"
                     BackgroundColor="Black"
                     TextColor="White"
@@ -71,7 +65,6 @@
                     Clicked="OnRegisterClicked"
                     WidthRequest="320"
                     HorizontalOptions="Center"/>
-            <!-- Sign In Link modern -->
             <HorizontalStackLayout HorizontalOptions="Center" Margin="0,24,0,0">
                 <Label Text="Already have an account ?"
                        TextColor="#2d2233"

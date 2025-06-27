@@ -127,11 +127,9 @@ namespace EcommerceApp.Services
                 {
                     var db = FirebaseConfig.GetFirestoreDb();
                     var favCollection = db.Collection("users").Document(_userId).Collection("favorites");
-                    // Șterge toate documentele existente
                     var snapshot = await favCollection.GetSnapshotAsync();
                     var deleteTasks = snapshot.Documents.Select(doc => doc.Reference.DeleteAsync());
                     await Task.WhenAll(deleteTasks);
-                    // Adaugă toate favoritele actuale
                     var addTasks = _favorites.Select(item =>
                         favCollection.Document(item.ProductId).SetAsync(item));
                     await Task.WhenAll(addTasks);
@@ -142,9 +140,6 @@ namespace EcommerceApp.Services
                 }
             }
         }
-
-       
-        // Metode pentru compatibilitate cu codul existent
 
         public void AddToFavorites(string productId) => 
             Task.Run(() => AddToFavoritesAsync(_authService.UserId ,productId));

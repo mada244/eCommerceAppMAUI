@@ -31,7 +31,6 @@ public partial class ForgotPasswordPage : ContentPage
 
         try
         {
-            // Dezactivăm butonul în timpul procesului
             ResetPasswordButton.IsEnabled = false;
             ResetPasswordButton.Text = "Sending...";
 
@@ -57,7 +56,6 @@ public partial class ForgotPasswordPage : ContentPage
         }
         finally
         {
-            // Reactivăm butonul
             ResetPasswordButton.IsEnabled = true;
             ResetPasswordButton.Text = "Send Reset Link";
         }

@@ -5,14 +5,12 @@
              BackgroundColor="#d2c4ad">
 
     <Grid RowDefinitions="Auto,*,Auto">
-        <!-- Logo sus -->
         <Image Source="logo.png"
                HeightRequest="80"
                WidthRequest="80"
                HorizontalOptions="Center"
                Margin="0,24,0,0"
                Grid.Row="0"/>
-        <!-- Banner Promo -->
         <Frame Grid.Row="0" HeightRequest="240" Padding="0" Margin="0,80,0,0" CornerRadius="0" HasShadow="False" BackgroundColor="#d2c4ad">
             <Image Source="feature1.png"
                    Aspect="AspectFill"
@@ -22,10 +20,8 @@
                    WidthRequest="{OnPlatform Default=400, iOS=400, Android=400}"/>
         </Frame>
 
-        <!-- Content -->
         <ScrollView Grid.Row="1" Padding="0,10,0,0">
             <VerticalStackLayout Spacing="30" Padding="0,0,0,20">
-                <!-- Summer Sale Section -->
                 <StackLayout>
                     <Grid ColumnDefinitions="*,Auto" Padding="20,0,20,0">
                         <Label Text="SUMMER SALE" FontSize="20" FontAttributes="Bold" TextColor="#2d2233" VerticalOptions="Center"/>
@@ -54,7 +50,6 @@
                     </CollectionView>
                 </StackLayout>
 
-                <!-- New Arrivals Section -->
                 <StackLayout>
                     <Grid ColumnDefinitions="*,Auto" Padding="20,0,20,0">
                         <Label Text="NEW ARRIVALS" FontSize="20" FontAttributes="Bold" TextColor="#2d2233" VerticalOptions="Center"/>
@@ -81,7 +76,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom Navigation -->
         <Grid Grid.Row="2" Padding="0" HeightRequest="70" BackgroundColor="#f3f1ee">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

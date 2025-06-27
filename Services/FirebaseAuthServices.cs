@@ -10,10 +10,9 @@ namespace EcommerceApp.Services
 {
     public class FirebaseAuthService
     {
-        private const string ApiKey = "AIzaSyC8m___OnwC7IF1LUXjarYvhB4USQtgvSg"; 
+        private const string ApiKey = ""; 
         private static readonly HttpClient _httpClient = new HttpClient();
         
-        // Stochează token-ul de autentificare
         public string AuthToken { get; private set; }
         public string UserId { get; private set; }
         public string UserEmail { get; private set; }
@@ -147,7 +146,6 @@ namespace EcommerceApp.Services
             }
         }
 
-        // Metodă pentru a verifica și reîncărca token-ul dacă este expirat
         public async Task<bool> RefreshTokenIfNeededAsync()
         {
             if (string.IsNullOrEmpty(AuthToken))
@@ -155,13 +153,10 @@ namespace EcommerceApp.Services
                 return false;
             }
 
-            // Pentru moment, returnăm true dacă avem un token
-            // În viitor, aici se poate implementa logica de refresh token
             return true;
         }
     }
 
-    // Clase pentru deserializarea răspunsului Firebase
     public class FirebaseAuthResponse
     {
         [JsonProperty("kind")]
@@ -195,7 +190,6 @@ namespace EcommerceApp.Services
         public string RequestType { get; set; }
     }
 
-    // Clasă pentru salvarea stării de autentificare
     public class AuthState
     {
         public string AuthToken { get; set; }

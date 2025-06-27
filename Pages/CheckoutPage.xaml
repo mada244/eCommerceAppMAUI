@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.CheckoutPage"
              Title="Checkout">
 
     <Grid RowDefinitions="Auto,*,Auto">
-        <!-- Header -->
         <Grid Grid.Row="0" Padding="20,10" BackgroundColor="#2196F3">
             <Grid ColumnDefinitions="Auto,*,Auto">
                 <Button Grid.Column="0" 
@@ -30,10 +29,8 @@
             </Grid>
         </Grid>
 
-        <!-- Checkout Form -->
         <ScrollView Grid.Row="1" Padding="20">
             <StackLayout Spacing="20">
-                <!-- Order Summary -->
                 <Frame Padding="15" BorderColor="#E0E0E0" CornerRadius="10" HasShadow="True">
                     <StackLayout>
                         <Label Text="Order Summary" 
@@ -79,7 +76,6 @@
                     </StackLayout>
                 </Frame>
 
-                <!-- Shipping Information -->
                 <Frame Padding="15" BorderColor="#E0E0E0" CornerRadius="10" HasShadow="True">
                     <StackLayout>
                         <Label Text="Shipping Information" 
@@ -111,7 +107,6 @@
                     </StackLayout>
                 </Frame>
 
-                <!-- Payment Information -->
                 <Frame Padding="15" BorderColor="#E0E0E0" CornerRadius="10" HasShadow="True">
                     <StackLayout>
                         <Label Text="Payment Information" 
@@ -139,7 +134,6 @@
             </StackLayout>
         </ScrollView>
 
-        <!-- Place Order Button -->
         <Grid Grid.Row="2" Padding="20" BackgroundColor="#F5F5F5">
             <Button x:Name="PlaceOrderButton"
                     Text="Place Order" 

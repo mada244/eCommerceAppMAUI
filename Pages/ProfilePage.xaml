@@ -3,7 +3,6 @@
              x:Class="EcommerceApp.ProfilePage"
              BackgroundColor="#d2c4ad">
     <Grid RowDefinitions="Auto,*,Auto">
-        <!-- Titlu -->
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,32,0,0">
             <Label Text="My Profile"
                    FontSize="28"
@@ -15,10 +14,8 @@
             <ImageButton Source="share.png" Grid.Column="1" BackgroundColor="Transparent" HeightRequest="32" WidthRequest="32" Margin="0,0,20,0" VerticalOptions="Center" HorizontalOptions="End"/>
         </Grid>
 
-        <!-- Conținut principal -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="24" Padding="0,0,0,0">
-                <!-- Card profil -->
                 <Frame BackgroundColor="White" CornerRadius="24" Padding="24" HasShadow="True" Margin="24,0,24,0">
                     <Grid ColumnDefinitions="*,Auto">
                         <VerticalStackLayout Spacing="6">
@@ -42,7 +39,6 @@
                     </Grid>
                 </Frame>
 
-                <!-- Shipping Address -->
                 <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True" Margin="24,0,24,0">
                     <Grid RowDefinitions="Auto,Auto" Padding="0,0,0,0">
                         <Grid ColumnDefinitions="*,Auto" Padding="20,16,20,0">
@@ -55,7 +51,6 @@
                     </Grid>
                 </Frame>
 
-                <!-- My Orders -->
                 <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True" Margin="24,0,24,0">
                     <Grid ColumnDefinitions="*,Auto" Padding="20,0,20,0">
                         <Label Text="MY ORDERS" FontSize="18" TextColor="#2d2233" FontAttributes="Bold"/>
@@ -63,7 +58,6 @@
                     </Grid>
                 </Frame>
 
-                <!-- App Settings -->
                 <Frame BackgroundColor="White" CornerRadius="18" Padding="0" HasShadow="True" Margin="24,0,24,0">
                     <Grid ColumnDefinitions="*,Auto" Padding="20,0,20,0">
                         <Label Text="APP SETTINGS" FontSize="18" TextColor="#2d2233" FontAttributes="Bold"/>
@@ -73,7 +67,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bara de navigare jos -->
         <Grid Grid.Row="2" Padding="0" HeightRequest="70" BackgroundColor="#f3f1ee">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

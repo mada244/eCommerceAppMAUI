@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.CartPage"
              BackgroundColor="#fdf7ee">
 
     <Grid RowDefinitions="Auto,*,Auto,Auto">
-        <!-- Titlu -->
         <Label Text="Cart"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center"
                Margin="0,20,0,10"/>
 
-        <!-- Conținut principal scrollabil -->
         <Grid Grid.Row="1">
             <CollectionView x:Name="CartListView" IsVisible="False" Margin="0,10,0,0" ItemsSource="{Binding CartDisplayItems}">
                 <CollectionView.ItemTemplate>
@@ -82,7 +80,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!-- Empty state -->
             <VerticalStackLayout x:Name="EmptyCartLayout" VerticalOptions="Center" HorizontalOptions="Center" Spacing="30">
                 <Image Source="cart_empty.png" HeightRequest="180" WidthRequest="180"/>
                 <Label Text="Your cart is empty"
@@ -92,7 +89,6 @@
             </VerticalStackLayout>
         </Grid>
 
-        <!-- Secțiune totalizare și checkout -->
         <StackLayout Grid.Row="2" Padding="24,0,24,16" Spacing="10">
             <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="8">
                 <Label Text="Sub Total" Grid.Row="0" Grid.Column="0" FontSize="18" TextColor="#6c6172"/>
@@ -107,7 +103,6 @@
             <Button Text="Checkout" BackgroundColor="Black" TextColor="White" FontSize="22" CornerRadius="18" HeightRequest="60" Margin="0,16,0,0" Clicked="OnCheckoutClicked"/>
         </StackLayout>
 
-        <!-- Bara de navigare jos -->
         <Grid Grid.Row="3" Padding="0" HeightRequest="70" BackgroundColor="#f6eddb">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

@@ -1,9 +1,8 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.StorePage"
              BackgroundColor="#d2c4ad">
     <Grid RowDefinitions="Auto,*,Auto">
-        <!-- Titlu -->
         <Label Text="Store"
                FontSize="28"
                FontAttributes="Bold"
@@ -11,10 +10,8 @@
                HorizontalOptions="Center"
                Margin="0,32,0,10"/>
 
-        <!-- Conținut principal -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="18" Padding="0,0,0,0">
-                <!-- Search Bar -->
                 <Frame BackgroundColor="#f3f1ee" CornerRadius="18" Padding="0" Margin="16,0,16,10" HasShadow="False">
                     <SearchBar Placeholder="Search"
                                BackgroundColor="Transparent"
@@ -25,7 +22,6 @@
                                TextColor="#2d2233"/>
                 </Frame>
 
-                <!-- Lista de produse -->
                 <CollectionView x:Name="ProductsCollection" ItemsSource="{Binding Products}" Margin="16,0,16,0">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="16" VerticalItemSpacing="16"/>
@@ -44,7 +40,6 @@
                                         <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="#2d2233" LineBreakMode="TailTruncation"/>
                                         <Label Text="{Binding Description}" FontSize="12" TextColor="#7B7B7B" LineBreakMode="TailTruncation"/>
                                         <Label Text="{Binding Price, StringFormat='$ {0:F2}'}" FontSize="18" TextColor="#2d2233" FontAttributes="Bold" Margin="0,5,0,0"/>
-                                        <!-- Butoane pentru Add to Cart și Favorite -->
                                         <Grid Margin="0,10,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -78,7 +73,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bara de navigare jos -->
         <Grid Grid.Row="2" Padding="0" HeightRequest="70" BackgroundColor="#f3f1ee">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

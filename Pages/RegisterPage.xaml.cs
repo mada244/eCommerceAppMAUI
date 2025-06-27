@@ -36,7 +36,6 @@ public partial class RegisterPage : ContentPage
             return;
         }
 
-        // Verificăm dacă parola are cel puțin 6 caractere (cerință Firebase)
         if (password.Length < 6)
         {
             await DisplayAlert("Error", "Password must be at least 6 characters long", "OK");

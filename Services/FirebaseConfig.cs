@@ -9,7 +9,6 @@ public class FirebaseConfig
     {
         try
         {
-            // Copiem fișierul din Resources într-un path accesibil aplicației
             using var stream = await FileSystem.OpenAppPackageFileAsync("service-account-key.json");
             var localPath = Path.Combine(FileSystem.CacheDirectory, "service-account-key.json");
             using (var fileStream = File.OpenWrite(localPath))
@@ -17,7 +16,6 @@ public class FirebaseConfig
                 await stream.CopyToAsync(fileStream);
             }
 
-            // Setăm variabila de mediu cu path-ul local
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", localPath);
 
             _firestoreDb = FirestoreDb.Create("ecommerce-e5dfd");
@@ -41,7 +39,6 @@ public class FirebaseConfig
 
     public static void InitializeFirestore()
     {
-        // Metoda sincronă pentru compatibilitate
         _ = InitializeFirestoreAsync();
     }
 }

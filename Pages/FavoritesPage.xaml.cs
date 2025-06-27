@@ -66,7 +66,6 @@ public partial class FavoritesPage : ContentPage, INotifyPropertyChanged
 
     private async void OnAddToFavoritesClicked(object sender, EventArgs e)
     {
-        // Exemplu: productId, productName, price, imageUrl
         // await _favoriteService.AddToFavoritesForCurrentUserAsync(productId, productName, price, imageUrl);
         // await LoadFavoritesFromFirebase();
     }

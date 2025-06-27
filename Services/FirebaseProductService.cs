@@ -37,11 +37,10 @@ namespace EcommerceApp.Services
                     products.Add(product);
                 }
 
-                // Dacă nu există produse, adăugăm produse de exemplu
                 if (!products.Any())
                 {
                     await AddSampleProductsAsync();
-                    return await GetAllProductsAsync(); // Recursiv pentru a obține produsele adăugate
+                    return await GetAllProductsAsync(); 
                 }
 
                 return products;

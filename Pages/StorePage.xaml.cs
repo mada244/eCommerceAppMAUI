@@ -74,7 +74,6 @@ public partial class StorePage : ContentPage
 	private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
 	{
 		// TODO: Implement search functionality
-		// For now, just show all products
 		_ = LoadProductsAsync();
 	}
 
@@ -151,7 +150,7 @@ public partial class StorePage : ContentPage
 
 	private async void OnStoreClicked(object sender, EventArgs e)
 	{
-		// Already on store page
+
 	}
 
 	private async void OnCartClicked(object sender, EventArgs e)

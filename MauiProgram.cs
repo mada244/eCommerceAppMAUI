@@ -22,7 +22,6 @@ public static class MauiProgram
 
 #endif
 
-        // Register services
         builder.Services.AddSingleton<FirebaseAuthService>();
         builder.Services.AddSingleton<CartService>();
         builder.Services.AddSingleton<FavoriteService>();
